@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 4ecc20cf6743db3419dfe96343806d36
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 625f186215c104763be7675aa2d941aa, type: 3}
+AssetOrigin:
+  serializedVersion: 1
+  productId: 322711
+  packageName: Platformer Mario style - forest and beach bundle
+  packageVersion: 1.0
+  assetPath: Assets/Super Mario Style/Shaders/Ground.shadergraph
+  uploadId: 762530

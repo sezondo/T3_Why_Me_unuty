@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 647fb78c0a961be4e896f7e5c88832af
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 322711
+  packageName: Platformer Mario style - forest and beach bundle
+  packageVersion: 1.0
+  assetPath: Assets/Super Mario Style/Scripts/KeyEvent.cs
+  uploadId: 762530

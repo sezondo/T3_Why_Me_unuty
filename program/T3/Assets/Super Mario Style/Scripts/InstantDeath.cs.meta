@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: bcabb5456c2b63b46b27341c771c1d55
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 322711
+  packageName: Platformer Mario style - forest and beach bundle
+  packageVersion: 1.0
+  assetPath: Assets/Super Mario Style/Scripts/InstantDeath.cs
+  uploadId: 762530

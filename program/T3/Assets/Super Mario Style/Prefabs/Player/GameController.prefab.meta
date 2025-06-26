@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 4e20895919c79fb469aeb3c3dec251e5
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 322711
+  packageName: Platformer Mario style - forest and beach bundle
+  packageVersion: 1.0
+  assetPath: Assets/Super Mario Style/Prefabs/Player/GameController.prefab
+  uploadId: 762530

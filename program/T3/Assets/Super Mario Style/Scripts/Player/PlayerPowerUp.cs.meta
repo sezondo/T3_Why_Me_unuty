@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 164b06958b898bc4893126de48338806
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 322711
+  packageName: Platformer Mario style - forest and beach bundle
+  packageVersion: 1.0
+  assetPath: Assets/Super Mario Style/Scripts/Player/PlayerPowerUp.cs
+  uploadId: 762530
