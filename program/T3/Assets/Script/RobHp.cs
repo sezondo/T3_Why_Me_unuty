@@ -13,6 +13,9 @@ public class RobHp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (rob01Data.hp > 0)
+        {
+            
+        }
     }
 }
