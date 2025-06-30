@@ -3,7 +3,7 @@ using UnityEngine;
 public class RobHp : MonoBehaviour
 {
 
-    public Rob01Data rob01Data;
+    public RobData robData;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -13,7 +13,7 @@ public class RobHp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rob01Data.hp > 0)
+        if (robData.maxHp > 0)
         {
             
         }
