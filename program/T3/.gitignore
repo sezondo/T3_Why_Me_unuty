@@ -30,13 +30,7 @@ Thumbs.db
 *.ncrunch*
 
 # Unity LFS 확장자 (LFS에서 관리하고, Git에는 경로만)
-*.psd
-*.fbx
-*.png
-*.jpg
-*.wav
-*.mp3
-*.mp4
+
 
 # 기타
 *.log
