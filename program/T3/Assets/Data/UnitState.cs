@@ -1,7 +1,7 @@
 public enum UnitState
 {
-    Idle,
-    Moving,
-    Attacking,
-    Dead
+    Idle, // 0
+    Moving, // 1
+    Attacking, // 2
+    Dead // 3
 }
