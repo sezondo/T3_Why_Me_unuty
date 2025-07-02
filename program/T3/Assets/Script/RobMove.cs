@@ -3,7 +3,7 @@ using UnityEngine.AI;
 using System.Collections;
 
 
-public class Move : MonoBehaviour
+public class RobMove : MonoBehaviour
 {
     private RobBase robBase;
     private NavMeshAgent agent;
@@ -48,7 +48,7 @@ public class Move : MonoBehaviour
         while (true)
         {
             //여기는 네비게이션 매쉬 감지하는 쪽
-            if (robBase.currentState == UnitState.Moving)
+            if (robBase.currentState == UnitState.Moving || robBase.currentState == UnitState.Idle)
             {
                 TrackTarget();
             }
@@ -72,6 +72,9 @@ public class Move : MonoBehaviour
         currentTarget = FindNearestEnemyInRange();
         if (currentTarget != null)
         {
+            if (robBase.currentState != UnitState.Moving)
+                robBase.ChangeState(UnitState.Moving);
+
             agent.SetDestination(currentTarget.position);
         }
         else

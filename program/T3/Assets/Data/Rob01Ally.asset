@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 50
   attackPower: 20
-  attackIntersection: 10
+  attackIntersection: 30
   moveSpeed: 3
   attackSpeed: 4
   faction: 0
-  unitState: 0
