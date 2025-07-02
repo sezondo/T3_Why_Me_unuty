@@ -3,16 +3,19 @@ using UnityEngine;
 public class RobHp : MonoBehaviour
 {
     private int currentHp;
-    public RobData robData;
     private RobBase robBase;
     private Animator animator;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         robBase = GetComponent<RobBase>();
-        currentHp = robData.maxHp;
+
         animator = GetComponent<Animator>();
+        
+        currentHp = robBase.data.maxHp;
     }
+
+    
 
     // Update is called once per frame
     void Update()

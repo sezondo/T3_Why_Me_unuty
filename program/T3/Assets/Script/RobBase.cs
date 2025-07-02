@@ -6,6 +6,7 @@ public class RobBase : MonoBehaviour
     public UnitState currentState;
     private Animator animator;
     private Collider unitCollider;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
