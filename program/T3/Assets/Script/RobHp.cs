@@ -11,15 +11,42 @@ public class RobHp : MonoBehaviour
         robBase = GetComponent<RobBase>();
 
         animator = GetComponent<Animator>();
-        
+
         currentHp = robBase.data.maxHp;
     }
 
-    
+
 
     // Update is called once per frame
     void Update()
     {
+
+        switch (robBase.currentState)
+        {
+            case UnitState.Idle:
+
+                break;
+
+            case UnitState.Attacking:
+
+                break;
+
+            case UnitState.Moving:
+
+                break;
+
+            case UnitState.Dead:
+
+                break;
+            case UnitState.Turn:
+
+                break;
+            case UnitState.Hurt:
+
+                break;
+
+        }
+
         if (currentHp <= 0)
         {
             if (robBase.currentState == UnitState.Dead) return;
@@ -33,8 +60,10 @@ public class RobHp : MonoBehaviour
     public void TakeDamage(int damage)
     {
         if (robBase.currentState == UnitState.Dead) return;
-        
+
 
         currentHp -= damage;
     }
+    
+    
 }

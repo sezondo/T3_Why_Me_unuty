@@ -6,6 +6,7 @@ public class RobBase : MonoBehaviour
     public UnitState currentState;
     private Animator animator;
     private Collider unitCollider;
+    public Rigidbody rb;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -13,6 +14,9 @@ public class RobBase : MonoBehaviour
         animator = GetComponent<Animator>();
         currentState = UnitState.Idle;
         unitCollider = GetComponent<Collider>();
+        rb = GetComponent<Rigidbody>();
+
+        rb.isKinematic = true;
     }
 
     // Update is called once per frame
@@ -34,6 +38,9 @@ public class RobBase : MonoBehaviour
             case UnitState.Dead:
                 //unitCollider.enabled = false; 나중에 고려해볼것 유닛 사망후 질질 끌려다니는거
                 return;
+            case UnitState.Turn:
+
+                break;
 
 
         }

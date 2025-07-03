@@ -17,5 +17,6 @@ MonoBehaviour:
   attackIntersection: 10
   moveSpeed: 3
   attackSpeed: 4
+  rotationSpeed: 10
+  RotationThreshold: 5
   faction: 1
-  unitState: 0

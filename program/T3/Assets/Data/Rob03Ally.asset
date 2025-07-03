@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a41591b2255e4b946ad4c900ec7f38ee, type: 3}
-  m_Name: Rob01Ally
+  m_Name: Rob03Ally
   m_EditorClassIdentifier: 
-  maxHp: 50
-  attackPower: 20
-  attackIntersection: 30
+  maxHp: 40
+  attackPower: 15
+  attackIntersection: 50
   moveSpeed: 3
-  attackSpeed: 4
-  rotationSpeed: 10
+  attackSpeed: 2
+  rotationSpeed: 5
   RotationThreshold: 5
   faction: 0

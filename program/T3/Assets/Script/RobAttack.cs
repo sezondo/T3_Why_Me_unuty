@@ -40,6 +40,14 @@ public class RobAttack : MonoBehaviour
             case UnitState.Dead:
 
                 break;
+
+            case UnitState.Turn:
+
+                break;
+
+            case UnitState.Hurt:
+
+                break;
         }
     }
 

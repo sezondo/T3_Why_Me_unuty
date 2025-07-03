@@ -7,6 +7,8 @@ public class RobMove : MonoBehaviour
 {
     private RobBase robBase;
     private NavMeshAgent agent;
+    public Transform currentTarget;
+    private bool isTargetRotation;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -15,6 +17,7 @@ public class RobMove : MonoBehaviour
         StartCoroutine(Tracking());
 
         agent.speed = robBase.data.moveSpeed;
+        isTargetRotation = false;
 
     }
 
@@ -28,14 +31,23 @@ public class RobMove : MonoBehaviour
                 break;
 
             case UnitState.Attacking:
-
+                //agent.stoppingDistance = robBase.data.attackIntersection;
                 break;
 
             case UnitState.Moving:
+                agent.stoppingDistance = 0f;
 
                 break;
 
             case UnitState.Dead:
+
+                break;
+
+            case UnitState.Turn:
+                agent.stoppingDistance = robBase.data.attackIntersection;
+                break;
+                
+            case UnitState.Hurt:
 
                 break;
 
@@ -58,9 +70,9 @@ public class RobMove : MonoBehaviour
             }
 
             //여기는 레이케스트로 해서 상태변환시키는거(너무 길어서 함수로 변환)
-            TryAttackByRaycast();
+            //TryAttackByRaycast();
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.2f);
         }
     }
 
@@ -68,10 +80,11 @@ public class RobMove : MonoBehaviour
     {
         agent.isStopped = false;
 
-        Transform currentTarget;
+        
         currentTarget = FindNearestEnemyInRange();
         if (currentTarget != null)
         {
+            
             if (robBase.currentState != UnitState.Moving)
                 robBase.ChangeState(UnitState.Moving);
 
@@ -84,22 +97,37 @@ public class RobMove : MonoBehaviour
         }
     }
 
+/*
     private void TryAttackByRaycast()
     {
-        Vector3 dir = transform.forward;
+        if (currentTarget == null) return;
+
+        Vector3 dir = (currentTarget.position - transform.position).normalized;
         float attackRange = robBase.data.attackIntersection;
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position + Vector3.up * 1f , dir, out hit, attackRange))
+        if (Physics.Raycast(transform.position + Vector3.up * 1f, dir, out hit, attackRange))
         {
             RobBase enemy = hit.collider.GetComponent<RobBase>();
             if (enemy != null && enemy.data.faction != robBase.data.faction)
             {
-                robBase.ChangeState(UnitState.Attacking);
+                agent.stoppingDistance = robBase.data.attackIntersection;
+                if (!isTargetRotation)
+                {
+                    isTargetRotation = true;
+                    StartCoroutine(TargetRotation());
+                }
+
+                //robBase.ChangeState(UnitState.Attacking);
+            }
+            else
+            {
+                agent.stoppingDistance = 0f;
             }
         }
         DrawDebugRay(transform.position, dir, attackRange); // 이건 디버그용
     }
+    */
 
     private void StopMoving()
     {
@@ -107,7 +135,7 @@ public class RobMove : MonoBehaviour
         agent.ResetPath();
     }
 
-    Transform FindNearestEnemyInRange()//Moving면 1초 간격으로 추적 
+    public Transform FindNearestEnemyInRange()//Moving면 1초 간격으로 추적 
     {
         RobBase[] enemies = FindObjectsByType<RobBase>(FindObjectsSortMode.None);
         Transform nearest = null;
@@ -126,11 +154,40 @@ public class RobMove : MonoBehaviour
 
         return nearest;
     }
-    
-    private void DrawDebugRay(Vector3 origin, Vector3 dir, float length)
+    public void TryStartRotation()
     {
-        Debug.DrawRay(origin + Vector3.up * 1f, dir * length, Color.red, 1f); // 1초 동안 씬 뷰에서 보임
+        if (!isTargetRotation)
+        {
+            robBase.ChangeState(UnitState.Turn);
+            StartCoroutine(TargetRotation());
+        }
+        
     }
+
+    public IEnumerator TargetRotation()
+    {
+        while (true)
+        {
+            isTargetRotation = true;
+            Vector3 direction = (currentTarget.position - transform.position).normalized;
+            direction.y = 0f;
+
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * robBase.data.rotationSpeed);
+
+            float angle = Quaternion.Angle(transform.rotation, targetRotation);
+            if (angle < robBase.data.RotationThreshold)
+            {
+                robBase.ChangeState(UnitState.Attacking);
+                isTargetRotation = false;
+                yield break;
+            }
+
+
+            yield return null;
+        }
+    }
+    
 
 
 }
