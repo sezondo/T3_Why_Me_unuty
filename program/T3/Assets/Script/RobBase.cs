@@ -17,6 +17,18 @@ public class RobBase : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         rb.isKinematic = true;
+
+
+        if (data.faction == FactionType.Ally)
+        {
+            gameObject.layer = 10;
+        }
+        else if(data.faction == FactionType.Enemy)
+        {
+            gameObject.layer = 20;
+        }
+        
+
     }
 
     // Update is called once per frame
