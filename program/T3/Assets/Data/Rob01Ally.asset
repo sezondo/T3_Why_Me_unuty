@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Rob01Ally
   m_EditorClassIdentifier: 
   maxHp: 50
-  attackPower: 20
   attackIntersection: 30
   moveSpeed: 3
   attackSpeed: 4
   rotationSpeed: 10
-  RotationThreshold: 5
+  RotationThreshold: 1
   faction: 0
+  bulletPrefab: {fileID: 0}

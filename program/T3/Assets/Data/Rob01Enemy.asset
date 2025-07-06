@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Rob01Enemy
   m_EditorClassIdentifier: 
   maxHp: 50
-  attackPower: 20
   attackIntersection: 10
   moveSpeed: 3
   attackSpeed: 4
   rotationSpeed: 10
-  RotationThreshold: 5
+  RotationThreshold: 1
   faction: 1
+  bulletPrefab: {fileID: 0}

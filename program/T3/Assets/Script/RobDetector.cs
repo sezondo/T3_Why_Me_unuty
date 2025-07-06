@@ -8,8 +8,9 @@ public class RobDetector : MonoBehaviour
     private RobBase robBase;
     private RobMove robMove;
     private Transform currentTarget => robMove.currentTarget;
+    public bool isDetecting;
+    private int layerMask;
 
-    int layerMask;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,11 +21,11 @@ public class RobDetector : MonoBehaviour
 
         if (robBase.data.faction == FactionType.Ally)
         {
-            layerMask = LayerMask.GetMask("Ally");
+            layerMask = LayerMask.GetMask("Enemy","Wall");
         }
         else if (robBase.data.faction == FactionType.Enemy)
         {
-            layerMask = LayerMask.GetMask("Enemy");
+            layerMask = LayerMask.GetMask("Ally","Wall");
         }
     }
 
@@ -62,6 +63,11 @@ public class RobDetector : MonoBehaviour
     {
         while (true)
         {
+            if (robBase.currentState == UnitState.Dead)
+            {
+                break;
+            }
+
             TryAttackByRaycast();
 
             yield return new WaitForSeconds(0.2f);
@@ -76,7 +82,7 @@ public class RobDetector : MonoBehaviour
         float attackRange = robBase.data.attackIntersection;
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position + Vector3.up * 1f, dir, out hit, attackRange))
+        if (Physics.Raycast(transform.position + Vector3.up * 1f, dir, out hit, attackRange, layerMask))
         {
             Debug.Log($"[{name}] Raycast: HIT {hit.collider.name}");//로그지옥이당
 
@@ -84,10 +90,12 @@ public class RobDetector : MonoBehaviour
             RobBase enemy = hit.collider.GetComponent<RobBase>();
             if (enemy != null && enemy.data.faction != robBase.data.faction)
             {
+                isDetecting = true;
                 robMove.TryStartRotation();
             }
             else if (enemy == null || enemy.data.faction == robBase.data.faction)
             {
+                
                 MissingTarget();
             }
         }
@@ -102,6 +110,8 @@ public class RobDetector : MonoBehaviour
     {
         if (robBase.currentState == UnitState.Attacking)
             robBase.ChangeState(UnitState.Idle);
+
+        isDetecting = false;
     }
     
     private void DrawDebugRay(Vector3 origin, Vector3 dir, float length)

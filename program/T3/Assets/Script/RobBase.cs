@@ -6,7 +6,7 @@ public class RobBase : MonoBehaviour
     public UnitState currentState;
     private Animator animator;
     private Collider unitCollider;
-    public Rigidbody rb;
+    private Rigidbody rb;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -21,11 +21,11 @@ public class RobBase : MonoBehaviour
 
         if (data.faction == FactionType.Ally)
         {
-            gameObject.layer = 10;
+            gameObject.layer = LayerMask.NameToLayer("Ally");
         }
         else if(data.faction == FactionType.Enemy)
         {
-            gameObject.layer = 20;
+            gameObject.layer = LayerMask.NameToLayer("Enemy");
         }
         
 

@@ -9,14 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a41591b2255e4b946ad4c900ec7f38ee, type: 3}
-  m_Name: Rob03Ally
+  m_Script: {fileID: 11500000, guid: e46174842ef2cb147a174b7efbafa8b2, type: 3}
+  m_Name: Rob03AllyBulletData
   m_EditorClassIdentifier: 
-  maxHp: 40
-  attackIntersection: 50
-  moveSpeed: 3
-  attackSpeed: 2
-  rotationSpeed: 5
-  RotationThreshold: 1
   faction: 0
-  bulletPrefab: {fileID: 2735628675244219352, guid: 267b4479c8eabd84b986a8d34f750f0b, type: 3}
+  bulletSpeed: 10
+  bulletLifeTime: 10
+  bulletDamage: 10

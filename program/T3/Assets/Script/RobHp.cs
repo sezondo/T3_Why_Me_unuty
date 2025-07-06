@@ -5,6 +5,7 @@ public class RobHp : MonoBehaviour
     private int currentHp;
     private RobBase robBase;
     private Animator animator;
+    bool die; //임시 조치
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -13,6 +14,8 @@ public class RobHp : MonoBehaviour
         animator = GetComponent<Animator>();
 
         currentHp = robBase.data.maxHp;
+
+        die = true;
     }
 
 
@@ -47,10 +50,8 @@ public class RobHp : MonoBehaviour
 
         }
 
-        if (currentHp <= 0)
+        if (currentHp <= 0 && robBase.currentState != UnitState.Dead)
         {
-            if (robBase.currentState == UnitState.Dead) return;
-
             animator.SetTrigger("Death");
             currentHp = 0;
             robBase.ChangeState(UnitState.Dead);

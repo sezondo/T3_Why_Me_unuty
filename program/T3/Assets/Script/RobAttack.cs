@@ -18,6 +18,12 @@ public class RobAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (robBase.currentState == UnitState.Dead)
+        {
+            return;
+        }
+
         switch (robBase.currentState)
         {
             case UnitState.Idle:
@@ -55,6 +61,11 @@ public class RobAttack : MonoBehaviour
     {
         while (true)
         {
+            if (robBase.currentState == UnitState.Dead)
+            {
+                break;
+            }
+
             if (robBase.currentState != UnitState.Attacking)
             {
                 break;
