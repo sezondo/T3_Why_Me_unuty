@@ -34,8 +34,6 @@ public class RobBase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
         switch (currentState)
         {
             case UnitState.Idle:
@@ -48,13 +46,11 @@ public class RobBase : MonoBehaviour
 
                 break;
             case UnitState.Dead:
-                //unitCollider.enabled = false; 나중에 고려해볼것 유닛 사망후 질질 끌려다니는거
+                unitCollider.enabled = false; //나중에 고려해볼것 유닛 사망후 질질 끌려다니는거
                 return;
             case UnitState.Turn:
 
                 break;
-
-
         }
 
         animator.SetInteger("State", (int)currentState); // Attack 애니메이션은 트리거로 따로 관리

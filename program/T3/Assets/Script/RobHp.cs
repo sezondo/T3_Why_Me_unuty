@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections;
 public class RobHp : MonoBehaviour
 {
     private int currentHp;
@@ -55,6 +55,7 @@ public class RobHp : MonoBehaviour
             animator.SetTrigger("Death");
             currentHp = 0;
             robBase.ChangeState(UnitState.Dead);
+            StartCoroutine(TakeDieWait());
         }
     }
 
@@ -65,6 +66,35 @@ public class RobHp : MonoBehaviour
 
         currentHp -= damage;
     }
-    
-    
+
+    private IEnumerator TakeDie()
+    {
+        float time = 0f;
+        float duration = 5f;
+        float speed = 3f;
+
+        Vector3 start = transform.position;
+        Vector3 end = start + Vector3.down * speed;
+
+        while (time < duration)
+        {
+            gameObject.transform.position = Vector3.Lerp(
+            start,
+            end,
+            time / duration);
+
+            time += Time.deltaTime;
+            yield return null;
+        }
+        
+        Destroy(gameObject);
+        transform.position = end;
+    }
+
+    private IEnumerator TakeDieWait()
+    {
+        yield return new WaitForSeconds(5f);
+
+        StartCoroutine(TakeDie());
+    }
 }
