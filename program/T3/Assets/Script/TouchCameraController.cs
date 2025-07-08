@@ -3,6 +3,8 @@ using UnityEngine;
 public class TouchCameraController : MonoBehaviour
 {
     public float moveSpeed = 5f;
+    public float minVelocity = 0.01f;
+    public float friction = 0.9f;
     public float zoomSpeed = 10f;
     public float minZoom = 5f;
     public float maxZoom = 20f;
@@ -14,6 +16,8 @@ public class TouchCameraController : MonoBehaviour
 
     private Vector2 lastTouchPos;
     private bool isDragging = false;
+
+    private Vector3 velocity = Vector3.zero;
 
     private Vector2 xLimit;
     private Vector2 zLimit;
@@ -30,39 +34,43 @@ public class TouchCameraController : MonoBehaviour
         if (Input.touchCount == 1)
         {
             Touch touch = Input.GetTouch(0);
-
-            // 드래그 시작
             if (touch.phase == TouchPhase.Began)
             {
                 lastTouchPos = touch.position;
                 isDragging = true;
+                velocity = Vector3.zero;
             }
-
-            // 드래그 중
             else if (touch.phase == TouchPhase.Moved && isDragging)
             {
                 Vector2 delta = touch.position - lastTouchPos;
-                Vector3 move = new Vector3(-delta.x, 0, -delta.y) * moveSpeed * Time.deltaTime;
-
-                // 이동 적용 전에 현재 위치 저장
-                Vector3 newPosition = transform.position + move;
-
-                // X/Z 위치를 Clamp해서 범위 제한
-                newPosition.x = Mathf.Clamp(newPosition.x, xLimit.x, xLimit.y);
-                newPosition.z = Mathf.Clamp(newPosition.z, zLimit.x, zLimit.y);
-
-
-                transform.position = newPosition;
-
+                velocity = new Vector3(-delta.x, 0, -delta.y) * moveSpeed;
                 lastTouchPos = touch.position;
             }
-
-            // 드래그 종료
             else if (touch.phase == TouchPhase.Ended)
             {
                 isDragging = false;
             }
+
         }
+
+        // 관성 이동
+        if (!isDragging && velocity.magnitude > minVelocity)
+        {
+            transform.position += velocity * Time.deltaTime;
+            velocity *= friction;
+        }
+        else if (isDragging)
+        {
+            transform.position += velocity * Time.deltaTime;
+
+        }
+
+        Vector3 pos = transform.position;
+        pos.x = Mathf.Clamp(pos.x, xLimit.x, xLimit.y);
+        pos.z = Mathf.Clamp(pos.z, zLimit.x, zLimit.y);
+        transform.position = pos;
+
+
 
         // 핀치 줌 (두 손가락)
         if (Input.touchCount == 2)

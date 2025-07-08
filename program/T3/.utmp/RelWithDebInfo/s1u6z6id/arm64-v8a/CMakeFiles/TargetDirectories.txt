@@ -1,0 +1,5 @@
+C:/Users/psdd2/Desktop/project/T3_Why_Me_unuty/program/T3/.utmp/RelWithDebInfo/s1u6z6id/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/psdd2/Desktop/project/T3_Why_Me_unuty/program/T3/.utmp/RelWithDebInfo/s1u6z6id/arm64-v8a/CMakeFiles/rebuild_cache.dir
+C:/Users/psdd2/Desktop/project/T3_Why_Me_unuty/program/T3/.utmp/RelWithDebInfo/s1u6z6id/arm64-v8a/GameActivity/CMakeFiles/game.dir
+C:/Users/psdd2/Desktop/project/T3_Why_Me_unuty/program/T3/.utmp/RelWithDebInfo/s1u6z6id/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+C:/Users/psdd2/Desktop/project/T3_Why_Me_unuty/program/T3/.utmp/RelWithDebInfo/s1u6z6id/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
