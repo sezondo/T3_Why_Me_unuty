@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2f285f90f8d504bce88384d788c634c3
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 314621
+  packageName: Brawl/Battle Arena
+  packageVersion: 1.0.0
+  assetPath: Assets/Brawl Arena/Prefabs/Environment/Track_OneTile.prefab
+  uploadId: 743767

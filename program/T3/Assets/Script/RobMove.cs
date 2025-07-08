@@ -96,8 +96,12 @@ public class RobMove : MonoBehaviour
 
     private void StopMoving()
     {
-        agent.isStopped = true;
-        agent.ResetPath();
+        if (agent != null && agent.isOnNavMesh)
+        {
+            agent.isStopped = true;
+            agent.ResetPath();
+
+        }
     }
 
     public Transform FindNearestEnemyInRange()//Moving면 1초 간격으로 추적 

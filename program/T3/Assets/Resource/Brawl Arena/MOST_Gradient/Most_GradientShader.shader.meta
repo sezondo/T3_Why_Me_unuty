@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 17e7d8d099e2a4f04b62c344584109e4
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 314621
+  packageName: Brawl/Battle Arena
+  packageVersion: 1.0.0
+  assetPath: Assets/Brawl Arena/MOST_Gradient/Most_GradientShader.shader
+  uploadId: 743767

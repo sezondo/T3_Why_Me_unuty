@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 605dbe586c6cf45d981da3ae1b3050ac
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 314621
+  packageName: Brawl/Battle Arena
+  packageVersion: 1.0.0
+  assetPath: Assets/Brawl Arena/Prefabs/GameModes/Safe.prefab
+  uploadId: 743767

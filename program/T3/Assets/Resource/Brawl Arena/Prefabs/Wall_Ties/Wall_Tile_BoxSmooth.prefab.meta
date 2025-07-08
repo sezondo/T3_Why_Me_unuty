@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 89218f6adb6db44ac95cc3b8281513a5
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 314621
+  packageName: Brawl/Battle Arena
+  packageVersion: 1.0.0
+  assetPath: Assets/Brawl Arena/Prefabs/Wall_Ties/Wall_Tile_BoxSmooth.prefab
+  uploadId: 743767

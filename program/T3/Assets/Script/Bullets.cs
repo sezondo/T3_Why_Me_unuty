@@ -51,8 +51,12 @@ public class Bullets : MonoBehaviour
 
         if (other.gameObject.layer != gameObject.layer)
         {
-            other.GetComponent<RobHp>()?.TakeDamage(damage);
-            DestroyBullet();
+            RobHp robHp = other.GetComponent<RobHp>();
+            if (robHp != null)
+            {
+                robHp.TakeDamage(damage);
+                DestroyBullet();
+            }
         }
 
     }

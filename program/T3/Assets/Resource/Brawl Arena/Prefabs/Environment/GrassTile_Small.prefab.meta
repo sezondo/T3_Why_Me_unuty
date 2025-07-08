@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 58dedbd459dcf4b9ca4c31989c7cb5cb
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 314621
+  packageName: Brawl/Battle Arena
+  packageVersion: 1.0.0
+  assetPath: Assets/Brawl Arena/Prefabs/Environment/GrassTile_Small.prefab
+  uploadId: 743767

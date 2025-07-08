@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a4ccee4d2a8a24d91a38c680e646b12a
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 314621
+  packageName: Brawl/Battle Arena
+  packageVersion: 1.0.0
+  assetPath: Assets/Brawl Arena/Prefabs/GameModes/BrawlBall.prefab
+  uploadId: 743767

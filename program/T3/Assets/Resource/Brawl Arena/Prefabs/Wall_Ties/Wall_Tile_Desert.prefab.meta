@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d2e73ed6773f6409d885b402aa77dce0
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 314621
+  packageName: Brawl/Battle Arena
+  packageVersion: 1.0.0
+  assetPath: Assets/Brawl Arena/Prefabs/Wall_Ties/Wall_Tile_Desert.prefab
+  uploadId: 743767

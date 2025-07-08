@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 53a1cbbd6635240cab05e8500a04c7d3
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 314621
+  packageName: Brawl/Battle Arena
+  packageVersion: 1.0.0
+  assetPath: Assets/Brawl Arena/Prefabs/GameModes/Jump_Platform_45.prefab
+  uploadId: 743767

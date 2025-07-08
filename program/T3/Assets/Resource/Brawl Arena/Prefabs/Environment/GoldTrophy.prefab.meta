@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: db4ef6bd95f574478b6b7c2983a15bdf
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 314621
+  packageName: Brawl/Battle Arena
+  packageVersion: 1.0.0
+  assetPath: Assets/Brawl Arena/Prefabs/Environment/GoldTrophy.prefab
+  uploadId: 743767
