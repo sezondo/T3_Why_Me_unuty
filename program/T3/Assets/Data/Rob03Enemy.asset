@@ -18,6 +18,5 @@ MonoBehaviour:
   attackSpeed: 2
   rotationSpeed: 5
   RotationThreshold: 1
-  cost: 2
   faction: 1
   bulletPrefab: {fileID: 5257508091212707071, guid: ff8887c037c75234f928b8333728989c, type: 3}
