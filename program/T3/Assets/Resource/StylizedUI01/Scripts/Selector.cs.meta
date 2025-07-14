@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 07bde7feab413a54dbb12af8c6ee54aa
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 147296
+  packageName: Stylized UI
+  packageVersion: 0.9.1
+  assetPath: Assets/StylizedUI01/Scripts/Selector.cs
+  uploadId: 313252

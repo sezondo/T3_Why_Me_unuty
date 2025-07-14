@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 0dfd61a9cdd63ae44af504e2126e1a4c
+labels:
+- Ui
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 147296
+  packageName: Stylized UI
+  packageVersion: 0.9.1
+  assetPath: Assets/StylizedUI01/Prefabs/Message_background_04.prefab
+  uploadId: 313252

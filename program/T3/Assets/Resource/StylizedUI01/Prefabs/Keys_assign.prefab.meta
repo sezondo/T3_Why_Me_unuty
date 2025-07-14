@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f17a5467275b74642874962112316422
+labels:
+- Ui
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 147296
+  packageName: Stylized UI
+  packageVersion: 0.9.1
+  assetPath: Assets/StylizedUI01/Prefabs/Keys_assign.prefab
+  uploadId: 313252

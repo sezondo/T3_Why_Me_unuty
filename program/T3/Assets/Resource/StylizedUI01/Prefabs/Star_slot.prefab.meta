@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 45379e5091122cf4c90fd8acfc050c92
+labels:
+- Ui
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 147296
+  packageName: Stylized UI
+  packageVersion: 0.9.1
+  assetPath: Assets/StylizedUI01/Prefabs/Star_slot.prefab
+  uploadId: 313252

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 8a54041beb7a73b44ab96dc35431c536
+labels:
+- Ui
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 147296
+  packageName: Stylized UI
+  packageVersion: 0.9.1
+  assetPath: Assets/StylizedUI01/Prefabs/Message_03.prefab
+  uploadId: 313252

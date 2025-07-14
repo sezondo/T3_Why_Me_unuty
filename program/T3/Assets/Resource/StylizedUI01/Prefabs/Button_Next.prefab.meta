@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 7488d0e3a61d38b4fa61da24553cece5
+labels:
+- Ui
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 147296
+  packageName: Stylized UI
+  packageVersion: 0.9.1
+  assetPath: Assets/StylizedUI01/Prefabs/Button_Next.prefab
+  uploadId: 313252

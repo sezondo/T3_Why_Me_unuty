@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 34a7f7ad3e51df44c991675e10cc6d3e
+labels:
+- Ui
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 147296
+  packageName: Stylized UI
+  packageVersion: 0.9.1
+  assetPath: Assets/StylizedUI01/Prefabs/Progressbar_01.prefab
+  uploadId: 313252

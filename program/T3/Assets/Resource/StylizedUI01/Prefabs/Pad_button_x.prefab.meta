@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 42a6b8cbbd144f547bf09d75554571d1
+labels:
+- Ui
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 147296
+  packageName: Stylized UI
+  packageVersion: 0.9.1
+  assetPath: Assets/StylizedUI01/Prefabs/Pad_button_x.prefab
+  uploadId: 313252

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 38584168f19c89c488376f1302025e0e
+labels:
+- Ui
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 147296
+  packageName: Stylized UI
+  packageVersion: 0.9.1
+  assetPath: Assets/StylizedUI01/Prefabs/Star.prefab
+  uploadId: 313252

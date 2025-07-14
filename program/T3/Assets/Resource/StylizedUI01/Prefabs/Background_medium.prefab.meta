@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 23aef3b1bdc12b64f8cb9e3ef9adfedd
+labels:
+- Ui
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 147296
+  packageName: Stylized UI
+  packageVersion: 0.9.1
+  assetPath: Assets/StylizedUI01/Prefabs/Background_medium.prefab
+  uploadId: 313252

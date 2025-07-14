@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 269b563e5d07ff54583947f97ecc24c4
+labels:
+- Ui
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 147296
+  packageName: Stylized UI
+  packageVersion: 0.9.1
+  assetPath: Assets/StylizedUI01/Prefabs/Toggle_01.prefab
+  uploadId: 313252

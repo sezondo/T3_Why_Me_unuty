@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5ae429d691e72d34fa3dfbe3c3294ef8
+labels:
+- Ui
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 147296
+  packageName: Stylized UI
+  packageVersion: 0.9.1
+  assetPath: Assets/StylizedUI01/Prefabs/Image_background_02.prefab
+  uploadId: 313252

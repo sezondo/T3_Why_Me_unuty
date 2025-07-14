@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f417e352005c8724896871e2d47d5676
+labels:
+- Ui
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 147296
+  packageName: Stylized UI
+  packageVersion: 0.9.1
+  assetPath: Assets/StylizedUI01/Prefabs/Scroll_view.prefab
+  uploadId: 313252

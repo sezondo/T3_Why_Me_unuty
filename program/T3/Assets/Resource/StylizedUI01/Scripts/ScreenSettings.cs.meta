@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: a655d966ea2e3e34eacb5cf090b9eff6
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 147296
+  packageName: Stylized UI
+  packageVersion: 0.9.1
+  assetPath: Assets/StylizedUI01/Scripts/ScreenSettings.cs
+  uploadId: 313252

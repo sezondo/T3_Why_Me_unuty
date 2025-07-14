@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 79b05042404bc2c47be2c4fd6ed7ca63
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 147296
+  packageName: Stylized UI
+  packageVersion: 0.9.1
+  assetPath: Assets/StylizedUI01/Scripts/HighlightFix.cs
+  uploadId: 313252

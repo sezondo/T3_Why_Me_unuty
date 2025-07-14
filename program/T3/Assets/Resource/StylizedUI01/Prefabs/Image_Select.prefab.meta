@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: cec7526dcc7e9d046b556b8599fa54c4
+labels:
+- Ui
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 147296
+  packageName: Stylized UI
+  packageVersion: 0.9.1
+  assetPath: Assets/StylizedUI01/Prefabs/Image_Select.prefab
+  uploadId: 313252

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1d9cb29e6bab05449be37f99e7b6e3ac
+labels:
+- Ui
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 147296
+  packageName: Stylized UI
+  packageVersion: 0.9.1
+  assetPath: Assets/StylizedUI01/Prefabs/Short_message_background_02.prefab
+  uploadId: 313252

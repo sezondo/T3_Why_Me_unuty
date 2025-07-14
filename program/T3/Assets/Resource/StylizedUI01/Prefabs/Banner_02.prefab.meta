@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e83fb7f85e7a3f04b921422f1d4848fd
+labels:
+- Ui
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 147296
+  packageName: Stylized UI
+  packageVersion: 0.9.1
+  assetPath: Assets/StylizedUI01/Prefabs/Banner_02.prefab
+  uploadId: 313252
