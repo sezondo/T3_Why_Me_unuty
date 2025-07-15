@@ -11,7 +11,6 @@ public class RobData : ScriptableObject
     public int attackSpeed;
     public float rotationSpeed;
     public float RotationThreshold;
-    public int cost;
     public FactionType faction;
     public GameObject bulletPrefab;
 

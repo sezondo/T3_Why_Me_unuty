@@ -1,0 +1,78 @@
+using UnityEngine;
+using System.Collections;
+
+public class RobDragAndDrop : MonoBehaviour
+{
+    [SerializeField] private LayerMask groundLayer;
+    private GameObject currentPreview;
+    private GameObject robGameObject;
+    private RobBaseReady robBaseReady;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        currentPreview = this.gameObject;
+        robBaseReady = GetComponent<RobBaseReady>();
+        robGameObject = robBaseReady.robRedayData.RobPrefab;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        Drag();
+    }
+    public void Drag()
+    {
+        if (robBaseReady.readyState == ReadyState.Readyed) return;
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f, LayerMask.GetMask("Ground")))
+        {
+            currentPreview.transform.position = hit.point;
+            if (robBaseReady.readyState != ReadyState.Readying)
+            {
+                robBaseReady.ChangeState(ReadyState.Readying);
+            }
+        }
+
+        if (Input.GetMouseButtonUp(0)) // 마우스 놓음
+        {
+            if (!Physics.Raycast(ray, 100f, LayerMask.GetMask("Ground")))
+            {
+                ReadyManager.instance.useButton = false;
+                Destroy(gameObject);
+                return;
+            }
+            ConfirmPlacement(hit.point);
+        }
+    }
+    void ConfirmPlacement(Vector3 position)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit[] hits = Physics.RaycastAll(ray, 100f, LayerMask.GetMask("Ally"));
+
+        foreach (var hit in hits)
+        {
+            if (hit.collider.gameObject != this.gameObject) // 자기 자신 제외
+            {
+                Debug.Log("겹침");
+                ReadyManager.instance.StartPopup();
+                return;
+            }
+
+        }
+        if (robBaseReady.readyState != ReadyState.Readyed)
+        {
+            ReadyManager.instance.useButton = false;
+            robBaseReady.ChangeState(ReadyState.Readyed);
+        }
+
+    }
+
+    
+
+
+
+
+    
+}
