@@ -32,7 +32,11 @@ public class ReadyManager : MonoBehaviour
     }
     public void StartPopup()
     {
-        StartCoroutine(Popup());
+        if (!popupImage.enabled)
+        {
+            StartCoroutine(Popup());
+        }
+        
     }
 
 
