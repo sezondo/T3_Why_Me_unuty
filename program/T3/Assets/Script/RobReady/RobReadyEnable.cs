@@ -19,11 +19,11 @@ public class RobReadyEnable : MonoBehaviour
 
     void ColorChange()
     {
-        if (RobBaseReady.readyState == ReadyState.Readying)
+        if (RobBaseReady.readyState == ReadyUnitState.Readying)
         {
             renderer.enabled = false;
         }
-        else if(RobBaseReady.readyState == ReadyState.Readyed)
+        else if(RobBaseReady.readyState == ReadyUnitState.Readyed)
         {
             renderer.enabled = true;
         }

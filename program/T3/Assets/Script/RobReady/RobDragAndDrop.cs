@@ -5,7 +5,6 @@ public class RobDragAndDrop : MonoBehaviour
 {
     [SerializeField] private LayerMask groundLayer;
     private GameObject currentPreview;
-    private GameObject robGameObject;
     private RobBaseReady robBaseReady;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -13,7 +12,6 @@ public class RobDragAndDrop : MonoBehaviour
     {
         currentPreview = this.gameObject;
         robBaseReady = GetComponent<RobBaseReady>();
-        robGameObject = robBaseReady.robRedayData.RobPrefab;
     }
 
     // Update is called once per frame
@@ -23,15 +21,15 @@ public class RobDragAndDrop : MonoBehaviour
     }
     public void Drag()
     {
-        if (robBaseReady.readyState == ReadyState.Readyed) return;
+        if (robBaseReady.readyState == ReadyUnitState.Readyed) return;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, 100f, LayerMask.GetMask("Ground")))
         {
             currentPreview.transform.position = hit.point;
-            if (robBaseReady.readyState != ReadyState.Readying)
+            if (robBaseReady.readyState != ReadyUnitState.Readying)
             {
-                robBaseReady.ChangeState(ReadyState.Readying);
+                robBaseReady.ChangeState(ReadyUnitState.Readying);
             }
         }
 
@@ -61,10 +59,10 @@ public class RobDragAndDrop : MonoBehaviour
             }
 
         }
-        if (robBaseReady.readyState != ReadyState.Readyed)
+        if (robBaseReady.readyState != ReadyUnitState.Readyed)
         {
             ReadyManager.instance.useButton = false;
-            robBaseReady.ChangeState(ReadyState.Readyed);
+            robBaseReady.ChangeState(ReadyUnitState.Readyed);
         }
 
     }

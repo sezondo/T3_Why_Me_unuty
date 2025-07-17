@@ -2,15 +2,24 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using DG.Tweening;
+using System.Collections.Generic;
 
 
+public struct ReadyCompletionData
+{
+    public Vector3 preFabDataVector3;
+    public GameObject preFabData;
+}
 
 public class ReadyManager : MonoBehaviour
 {
+    private ReadyCompletionData readyCompletionData;
     public bool useButton;
     public static ReadyManager instance;
     public Image popupImage;
     public CanvasGroup popupGroup;
+    [SerializeField] private LayerMask allyLayerMask;
+    public ReadyManagerState readyManagerState;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -29,6 +38,9 @@ public class ReadyManager : MonoBehaviour
             Debug.LogWarning("씬에 두개 이상의 게임 매니저가 존재합니다!");
             Destroy(gameObject);
         }
+
+        readyCompletionData = new ReadyCompletionData();
+        readyManagerState = ReadyManagerState.Ready;
     }
     public void StartPopup()
     {
@@ -36,7 +48,7 @@ public class ReadyManager : MonoBehaviour
         {
             StartCoroutine(Popup());
         }
-        
+
     }
 
 
@@ -55,5 +67,47 @@ public class ReadyManager : MonoBehaviour
         popupGroup.DOFade(0f, 0.5f);
         yield return new WaitForSeconds(1f);
         popupImage.enabled = false;
+    }
+
+    public void GameStart()
+    {
+
+        List<ReadyCompletionData> readyingPositions = new List<ReadyCompletionData>();
+
+        Collider[] colliders = Physics.OverlapSphere(Vector3.zero, 1000f, allyLayerMask);
+        HashSet<Transform> chekedParents = new HashSet<Transform>();
+
+        foreach (Collider col in colliders)
+        {
+            Debug.Log("유닛 수: " + readyingPositions.Count);
+
+            Transform parent = col.transform.root;
+
+            if (chekedParents.Contains(parent))
+            {
+                continue;
+            }
+
+            chekedParents.Add(parent);
+
+            RobBaseReady readyComp = parent.GetComponent<RobBaseReady>();
+
+            if (readyComp != null && readyComp.readyState == ReadyUnitState.Readyed)
+            {
+                readyCompletionData.preFabData = readyComp.robRedayData.RobPrefab;
+                readyCompletionData.preFabDataVector3 = parent.position;
+                Debug.Log("readyingPositions add 잘됨 ");
+                readyingPositions.Add(readyCompletionData);
+            }
+        }
+
+        foreach (ReadyCompletionData rcd in readyingPositions)
+        {
+            Instantiate(rcd.preFabData, rcd.preFabDataVector3, Quaternion.identity);
+        }
+
+        readyManagerState = ReadyManagerState.Start;
+
+        
     }
 }

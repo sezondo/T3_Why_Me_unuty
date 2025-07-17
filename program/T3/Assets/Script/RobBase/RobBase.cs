@@ -54,6 +54,7 @@ public class RobBase : MonoBehaviour
         }
 
         animator.SetInteger("State", (int)currentState); // Attack 애니메이션은 트리거로 따로 관리
+        
     }
 
     public void ChangeState(UnitState unitState)

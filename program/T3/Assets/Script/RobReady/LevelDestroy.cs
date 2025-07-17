@@ -1,16 +1,11 @@
 using UnityEngine;
 
-public class RobBaseReady : MonoBehaviour
+public class LevelDestroy : MonoBehaviour
 {
-    public ReadyUnitState readyState;
-    public RobRedayData robRedayData;
-    
-
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -20,11 +15,5 @@ public class RobBaseReady : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-    public void ChangeState(ReadyUnitState unitState)
-    {
-        if ( this.readyState == unitState) return;
-
-        this.readyState = unitState;
     }
 }
