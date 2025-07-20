@@ -35,14 +35,25 @@ public class RobDragAndDrop : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0)) // 마우스 놓음
         {
-            if (!Physics.Raycast(ray, 100f, LayerMask.GetMask("Ground")))
+            if (ReadyManager.instance.currentCost + robBaseReady.robRedayData.cost > ReadyManager.instance.levelData.Cost)
+            {
+                ReadyManager.instance.StartPopupCostOverrun();
+                ReadyManager.instance.useButton = false;
+                Destroy(gameObject);
+                return;
+
+            }
+
+            if (!Physics.Raycast(ray, 100f, LayerMask.GetMask("Ground")) && !(ReadyManager.instance.currentCost + robBaseReady.robRedayData.cost > ReadyManager.instance.levelData.Cost))
             {
                 ReadyManager.instance.useButton = false;
                 Destroy(gameObject);
                 return;
             }
+
             ConfirmPlacement(hit.point);
         }
+
     }
     void ConfirmPlacement(Vector3 position)
     {
@@ -57,13 +68,16 @@ public class RobDragAndDrop : MonoBehaviour
                 ReadyManager.instance.StartPopup();
                 return;
             }
-
         }
+
         if (robBaseReady.readyState != ReadyUnitState.Readyed)
         {
             ReadyManager.instance.useButton = false;
             robBaseReady.ChangeState(ReadyUnitState.Readyed);
         }
+
+        ReadyManager.instance.AddCost(robBaseReady.robRedayData.cost);
+        ReadyManager.instance.currentPreviews.Add(this.gameObject);
 
     }
 

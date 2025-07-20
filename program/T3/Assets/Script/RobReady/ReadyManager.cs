@@ -13,13 +13,19 @@ public struct ReadyCompletionData
 
 public class ReadyManager : MonoBehaviour
 {
+    public List<GameObject> currentPreviews = new List<GameObject>();
     private ReadyCompletionData readyCompletionData;
     public bool useButton;
     public static ReadyManager instance;
     public Image popupImage;
+    public Image popupImageCostOverrun;
     public CanvasGroup popupGroup;
+    public CanvasGroup popupCostOverrunGroup;
+    public LevelData levelData;
     [SerializeField] private LayerMask allyLayerMask;
     public ReadyManagerState readyManagerState;
+    public int currentCost;
+    public Text currentCostText;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -55,7 +61,7 @@ public class ReadyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        currentCostText.text = "Current Cost : " + currentCost.ToString();
     }
 
     public IEnumerator Popup()
@@ -67,6 +73,7 @@ public class ReadyManager : MonoBehaviour
         popupGroup.DOFade(0f, 0.5f);
         yield return new WaitForSeconds(1f);
         popupImage.enabled = false;
+        
     }
 
     public void GameStart()
@@ -108,6 +115,46 @@ public class ReadyManager : MonoBehaviour
 
         readyManagerState = ReadyManagerState.Start;
 
+
+    }
+
+    public void CancelAllPlacement()
+    {
+        currentCost = 0;
+        foreach (var preview in currentPreviews)
+        {
+            RobBaseReady baseReady = preview.GetComponent<RobBaseReady>();
+            if (baseReady != null)
+            {
+                Destroy(baseReady.gameObject);
+            }
+        }
+        currentPreviews.Clear();
+    }
+
+    public void AddCost(int cost)
+    {
+        currentCost += cost;
+    }
+
+    public void StartPopupCostOverrun()
+    {
+        if (!popupImageCostOverrun.enabled)
+        {
+            StartCoroutine(PopupCostOverrun());
+        }
+    }
+    public IEnumerator PopupCostOverrun()
+    {
+        popupImageCostOverrun.enabled = true;
+        popupCostOverrunGroup.alpha = 0f;
+        popupCostOverrunGroup.DOFade(1f, 0.5f);
+        yield return new WaitForSeconds(3f);
+
+        
+        popupCostOverrunGroup.DOFade(0f, 0.5f);
+        yield return new WaitForSeconds(1f);
+        popupImageCostOverrun.enabled = false;
         
     }
 }
