@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using DG.Tweening;
 using System.Collections.Generic;
+using Ricimi;
 
 
 public struct ReadyCompletionData
@@ -26,6 +27,9 @@ public class ReadyManager : MonoBehaviour
     public ReadyManagerState readyManagerState;
     public int currentCost;
     public Text currentCostText;
+    [SerializeField] private AudioClip popupClip;
+    [SerializeField] private AudioClip dropClip;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -52,6 +56,7 @@ public class ReadyManager : MonoBehaviour
     {
         if (!popupImage.enabled)
         {
+            PopupAudio();
             StartCoroutine(Popup());
         }
 
@@ -73,7 +78,7 @@ public class ReadyManager : MonoBehaviour
         popupGroup.DOFade(0f, 0.5f);
         yield return new WaitForSeconds(1f);
         popupImage.enabled = false;
-        
+
     }
 
     public void GameStart()
@@ -141,6 +146,7 @@ public class ReadyManager : MonoBehaviour
     {
         if (!popupImageCostOverrun.enabled)
         {
+            PopupAudio();
             StartCoroutine(PopupCostOverrun());
         }
     }
@@ -151,10 +157,21 @@ public class ReadyManager : MonoBehaviour
         popupCostOverrunGroup.DOFade(1f, 0.5f);
         yield return new WaitForSeconds(3f);
 
-        
+
         popupCostOverrunGroup.DOFade(0f, 0.5f);
         yield return new WaitForSeconds(1f);
         popupImageCostOverrun.enabled = false;
-        
+
+    }
+
+    public void PopupAudio()
+    {
+        SoundManager.instance.PlaySFXUI(popupClip);
+    }
+
+    public void DorpAudio()
+    {
+        SoundManager.instance.PlaySFXUI(dropClip);
+
     }
 }

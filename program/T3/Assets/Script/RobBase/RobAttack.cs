@@ -7,6 +7,7 @@ public class RobAttack : MonoBehaviour
     private Animator animator;
     private RobStooter[] shooter;
     private bool CoroutineCheck;
+    [SerializeField] private AudioClip attackAudioClip;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -81,6 +82,7 @@ public class RobAttack : MonoBehaviour
     }
 
     private void Fire() {
+        SoundManager.instance.PlaySFX(attackAudioClip, this.transform);
         foreach (var fp in shooter)
         {
             fp.Stoot();

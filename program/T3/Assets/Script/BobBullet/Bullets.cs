@@ -7,6 +7,7 @@ public class Bullets : MonoBehaviour
     private int damage;
     private FactionType factionType;
     public BulletData bulletData;
+    [SerializeField] private GameObject hitPrefab;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -65,6 +66,6 @@ public class Bullets : MonoBehaviour
     {
         Destroy(gameObject);
         //여따가 사운드 매니저랑 이펙트 매니저 넣을껏
-
+        EffectManager.instance.PlayEffecting(hitPrefab, this.transform);
     }
 }

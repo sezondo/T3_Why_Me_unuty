@@ -6,8 +6,12 @@ using UnityEngine.UI;
 public class GameEndPopup : MonoBehaviour
 {
     public Image winImage;
-    public Image lossTmage;
+    public Image lossImage;
     private bool isTween;
+    [SerializeField] private AudioClip winClip;
+    [SerializeField] private AudioClip lossClip;
+
+
 
     // Start is called once before 
     // the first execution of Update after the MonoBehaviour is created
@@ -21,13 +25,15 @@ public class GameEndPopup : MonoBehaviour
     {
         if (!isTween && BattleManager.instance.battleState == BattleState.win)
         {
+            SoundManager.instance.PlaySFXUI(winClip);
             isTween = true;
             winImage.transform.DOMove(new Vector3(winImage.transform.position.x, 1000, winImage.transform.position.z), 1f);
         }
         if (!isTween && BattleManager.instance.battleState == BattleState.loss)
         {
+            SoundManager.instance.PlaySFXUI(lossClip);
             isTween = true;
-            lossTmage.transform.DOMove(new Vector3(lossTmage.transform.position.x, 1000, lossTmage.transform.position.z), 1f);
+            lossImage.transform.DOMove(new Vector3(lossImage.transform.position.x, 1000, lossImage.transform.position.z), 1f);
         }
     }
 }

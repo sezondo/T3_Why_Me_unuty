@@ -1,17 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 107a677fe63331e428529c716aa2347b, type: 3}
-  m_Name: Rob03Ally_ReadyData
-  m_EditorClassIdentifier: 
-  cost: 3
-  RobRedayPrefab: {fileID: 8168048009294555584, guid: 52c94c7e7f49a6545a670fcf052b02eb, type: 3}
-  RobPrefab: {fileID: 1366891442294153421, guid: 7fba240b058b6eb4dae42b868e2f1e29, type: 3}
+version https://git-lfs.github.com/spec/v1
+oid sha256:6dc03e8ccfeda69c86b3c1e9d6c2564407841d44b77d6717847b1542384097b3
+size 624
