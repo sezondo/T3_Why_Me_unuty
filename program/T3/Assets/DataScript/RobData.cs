@@ -6,9 +6,9 @@ using UnityEngine;
 public class RobData : ScriptableObject
 {
     public int maxHp;
-    public int attackIntersection;
-    public int moveSpeed;
-    public int attackSpeed;
+    public float attackIntersection;
+    public float moveSpeed;
+    public float attackSpeed;
     public float rotationSpeed;
     public float RotationThreshold;
     public FactionType faction;
