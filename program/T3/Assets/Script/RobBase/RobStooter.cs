@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class RobStooter : MonoBehaviour
 {
-    private RobBase robBase;
+    public RobBase robBase;
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public virtual void Start()
     {
         robBase = GetComponentInParent<RobBase>();
     }
@@ -17,7 +17,7 @@ public class RobStooter : MonoBehaviour
 
     }
 
-    public void Stoot()
+    public virtual void Stoot()
     {
         Instantiate(robBase.data.bulletPrefab, transform.position, transform.rotation);
     }

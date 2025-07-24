@@ -9,7 +9,7 @@ public class Bullets : MonoBehaviour
     public BulletData bulletData;
     [SerializeField] private GameObject hitPrefab;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public virtual void Start()
     {
         speed = bulletData.bulletSpeed;
         lifeTime = bulletData.bulletLifeTime;
@@ -30,12 +30,12 @@ public class Bullets : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
-    void OnTriggerEnter(Collider other)
+    public virtual void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == gameObject.layer)
         {
@@ -62,7 +62,7 @@ public class Bullets : MonoBehaviour
 
     }
 
-    public void DestroyBullet()
+    public virtual void DestroyBullet()
     {
         Destroy(gameObject);
         //여따가 사운드 매니저랑 이펙트 매니저 넣을껏

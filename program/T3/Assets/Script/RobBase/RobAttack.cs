@@ -3,10 +3,10 @@ using System.Collections;
 
 public class RobAttack : MonoBehaviour
 {
-    private RobBase robBase;
-    private Animator animator;
+    public RobBase robBase;
+    public Animator animator;
     private RobStooter[] shooter;
-    private bool CoroutineCheck;
+    public bool CoroutineCheck;
     [SerializeField] private AudioClip attackAudioClip;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -58,7 +58,7 @@ public class RobAttack : MonoBehaviour
         }
     }
 
-    private IEnumerator Attacking()
+    public virtual IEnumerator Attacking()
     {
         while (true)
         {
@@ -81,7 +81,7 @@ public class RobAttack : MonoBehaviour
         CoroutineCheck = false;
     }
 
-    private void Fire() {
+    public void Fire() {
         SoundManager.instance.PlaySFX(attackAudioClip, this.transform);
         foreach (var fp in shooter)
         {

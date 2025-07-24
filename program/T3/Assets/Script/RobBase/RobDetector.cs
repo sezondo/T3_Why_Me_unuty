@@ -5,15 +5,15 @@ using System.Collections;
 public class RobDetector : MonoBehaviour
 {
 
-    private RobBase robBase;
-    private RobMove robMove;
+    public RobBase robBase;
+    public RobMove robMove;
     private Transform currentTarget => robMove.currentTarget;
     public bool isDetecting;
-    private int layerMask;
+    public int layerMask;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public virtual void Start()
     {
         robBase = GetComponent<RobBase>();
         robMove = GetComponent<RobMove>();
@@ -59,7 +59,7 @@ public class RobDetector : MonoBehaviour
         }
     }
 
-    private IEnumerator Detector()
+    public IEnumerator Detector()
     {
         while (true)
         {
