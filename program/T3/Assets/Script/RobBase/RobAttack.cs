@@ -5,11 +5,11 @@ public class RobAttack : MonoBehaviour
 {
     public RobBase robBase;
     public Animator animator;
-    private RobStooter[] shooter;
+    [HideInInspector] public RobStooter[] shooter;
     public bool CoroutineCheck;
-    [SerializeField] private AudioClip attackAudioClip;
+    public AudioClip attackAudioClip;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public virtual void Start()
     {
         animator = GetComponent<Animator>();
         robBase = GetComponent<RobBase>();
@@ -81,7 +81,7 @@ public class RobAttack : MonoBehaviour
         CoroutineCheck = false;
     }
 
-    public void Fire() {
+    public virtual void Fire() {
         SoundManager.instance.PlaySFX(attackAudioClip, this.transform);
         foreach (var fp in shooter)
         {

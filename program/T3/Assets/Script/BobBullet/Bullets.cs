@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class Bullets : MonoBehaviour
 {
-    private float speed;
-    private float lifeTime;
-    private int damage;
-    private FactionType factionType;
+    [HideInInspector] public float speed;
+    [HideInInspector] public float lifeTime;
+    [HideInInspector] public int damage;
+    [HideInInspector] public FactionType factionType;
     public BulletData bulletData;
     [SerializeField] private GameObject hitPrefab;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
