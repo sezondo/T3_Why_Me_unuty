@@ -28,6 +28,14 @@ public class GameEndPopup : MonoBehaviour
             SoundManager.instance.PlaySFXUI(winClip);
             isTween = true;
             winImage.transform.DOMove(new Vector3(winImage.transform.position.x, 1000, winImage.transform.position.z), 1f);
+
+            
+            if (PlayerManager.instance.clearNumber >= ReadyManager.instance.levelData.Level)
+            {
+                PlayerManager.instance.clearNumber = ReadyManager.instance.levelData.Level;
+            }
+            
+            
         }
         if (!isTween && BattleManager.instance.battleState == BattleState.loss)
         {

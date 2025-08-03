@@ -9,6 +9,13 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource uiSource;
     private List<AudioSource> sfxPool = new List<AudioSource>();
 
+    [SerializeField, Range(0f, 1f)]
+    private float sfxVolume = 1f;
+
+    [SerializeField, Range(0f, 1f)]
+    private float uiVolume = 1f;
+
+
     private void Awake()
     {
         if (instance == null)
@@ -54,13 +61,14 @@ public class SoundManager : MonoBehaviour
 
         AudioSource src = GetAvailableSource();
         src.transform.position = target.position;
+        src.volume = sfxVolume;
         src.PlayOneShot(clip);
     }
 
     public void PlaySFXUI(AudioClip clip)
     {
         if (clip == null) return;
-        
+        uiSource.volume = uiVolume;
         uiSource.PlayOneShot(clip);
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
+    public int clearNumber;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
