@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Strats : MonoBehaviour
+public class StartButton : MonoBehaviour
 {
 
     public Text uiText;

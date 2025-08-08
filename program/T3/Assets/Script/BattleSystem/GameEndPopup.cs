@@ -29,11 +29,13 @@ public class GameEndPopup : MonoBehaviour
             isTween = true;
             winImage.transform.DOMove(new Vector3(winImage.transform.position.x, 1000, winImage.transform.position.z), 1f);
 
-            
-            if (PlayerManager.instance.clearNumber >= ReadyManager.instance.levelData.Level)
+
+            if (PlayerManager.instance.clearNumber < ReadyManager.instance.levelData.Level)
             {
                 PlayerManager.instance.clearNumber = ReadyManager.instance.levelData.Level;
+
             }
+
             
             
         }

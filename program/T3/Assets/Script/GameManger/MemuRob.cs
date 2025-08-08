@@ -2,10 +2,10 @@ using System;
 using UnityEngine;
 
 
-public class Memu : MonoBehaviour
+public class MemuRob : MonoBehaviour
 {
     public GameObject[] gameObjects;
-    int RandomNum;
+    private int RandomNum;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,6 +17,8 @@ public class Memu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
+
+    
 }
