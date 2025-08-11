@@ -4,6 +4,8 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
     public int clearNumber;
+    private const string KEY_CLEAR = "pm_clearNumber";
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -23,12 +25,17 @@ public class PlayerManager : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
+        clearNumber = PlayerPrefs.GetInt(KEY_CLEAR, 0);
     }
 
-
-    // Update is called once per frame
-    void Update()
+    public void UpdateClearNumberIfHigher(int level)
     {
-        
+        if (level > clearNumber)
+        {
+            clearNumber = level;
+            PlayerPrefs.SetInt(KEY_CLEAR, clearNumber);
+            PlayerPrefs.Save(); // 즉시 디스크 반영
+        }
     }
+
 }
