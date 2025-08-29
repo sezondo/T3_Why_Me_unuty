@@ -6,8 +6,8 @@
 
 유튜브 링크 : https://youtu.be/a92dWzTW6Yc?si=XboiPHjLudrlJBKZ
 
-코드 : https://github.com/sezondo/T3_Why_Me_unuty/tree/main/program/T3/Assets/Script
-데이터 : https://github.com/sezondo/T3_Why_Me_unuty/tree/main/program/T3/Assets/DataScript
+코드 : https://github.com/sezondo/T3_Why_Me_unuty/tree/main/program/T3/Assets/Script  
+데이터 : https://github.com/sezondo/T3_Why_Me_unuty/tree/main/program/T3/Assets/DataScript  
 
 
 
