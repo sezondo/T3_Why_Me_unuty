@@ -1,7 +1,13 @@
 # T3_Why_Me_unuty 
 
-<img width="1805" height="993" alt="image" src="https://github.com/user-attachments/assets/b4684a7d-cb8d-4c51-b81a-076b6a7506d7" />
+<img width="1780" height="980" alt="image" src="https://github.com/user-attachments/assets/757ea4d1-d76e-434c-8f42-b016cc2416d7" />
 
+
+
+유튜브 링크 : https://youtu.be/a92dWzTW6Yc?si=XboiPHjLudrlJBKZ
+
+코드 : https://github.com/sezondo/T3_Why_Me_unuty/tree/main/program/T3/Assets/Script
+데이터 : https://github.com/sezondo/T3_Why_Me_unuty/tree/main/program/T3/Assets/DataScript
 
 
 
