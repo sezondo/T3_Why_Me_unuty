@@ -5,11 +5,11 @@ using System.Collections;
 public class RobDetector : MonoBehaviour
 {
 
-    public RobBase robBase;
-    public RobMove robMove;
+    [HideInInspector]public RobBase robBase;
+    [HideInInspector]public RobMove robMove;
     private Transform currentTarget => robMove.currentTarget;
-    public bool isDetecting;
-    public int layerMask;
+    [HideInInspector]public bool isDetecting;
+    [HideInInspector]public int layerMask;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

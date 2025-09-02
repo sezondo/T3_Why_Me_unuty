@@ -16,17 +16,17 @@ public class ReadyManager : MonoBehaviour
 {
     public List<GameObject> currentPreviews = new List<GameObject>();
     private ReadyCompletionData readyCompletionData;
-    public bool useButton;
+    [HideInInspector] public bool useButton;
     public static ReadyManager instance;
-    public Image popupImage;
-    public Image popupImageCostOverrun;
-    public CanvasGroup popupGroup;
-    public CanvasGroup popupCostOverrunGroup;
+    [SerializeField] private Image popupImage;
+    [SerializeField] private Image popupImageCostOverrun;
+    [SerializeField] private CanvasGroup popupGroup;
+    [SerializeField] private CanvasGroup popupCostOverrunGroup;
     public LevelData levelData;
     [SerializeField] private LayerMask allyLayerMask;
     public ReadyManagerState readyManagerState;
-    public int currentCost;
-    public Text currentCostText;
+    [HideInInspector] public int currentCost;
+    [SerializeField] private Text currentCostText;
     [SerializeField] private AudioClip popupClip;
     [SerializeField] private AudioClip dropClip;
 

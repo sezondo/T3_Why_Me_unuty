@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Bullets : MonoBehaviour
 {
-    [HideInInspector] public float speed;
-    [HideInInspector] public float lifeTime;
+    [SerializeField] private float speed;
+    [SerializeField] private float lifeTime;
     [HideInInspector] public int damage;
     [HideInInspector] public FactionType factionType;
     [SerializeField] private GameObject hitPrefab;

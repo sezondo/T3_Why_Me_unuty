@@ -8,7 +8,7 @@ public class RobMove : MonoBehaviour
     private RobBase robBase;
     private RobDetector robDetector;
     private NavMeshAgent agent;
-    public Transform currentTarget;
+    [HideInInspector]public Transform currentTarget;
     private bool isTargetRotation;
     private Coroutine rotationCoroutine;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
