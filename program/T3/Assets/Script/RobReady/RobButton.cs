@@ -11,15 +11,15 @@ public class RobButton : MonoBehaviour
     private GameObject previewUnitPrefab07;
     private GameObject previewUnitPrefab08;
     private GameObject previewUnitPrefab012;
-    public RobRedayData robRedayData01;
-    public RobRedayData robRedayData02;
-    public RobRedayData robRedayData03;
-    public RobRedayData robRedayData04;
-    public RobRedayData robRedayData05;
-    public RobRedayData robRedayData06;
-    public RobRedayData robRedayData07;
-    public RobRedayData robRedayData08;
-    public RobRedayData robRedayData12;
+    public RobReadyData robRedayData01;
+    public RobReadyData robRedayData02;
+    public RobReadyData robRedayData03;
+    public RobReadyData robRedayData04;
+    public RobReadyData robRedayData05;
+    public RobReadyData robRedayData06;
+    public RobReadyData robRedayData07;
+    public RobReadyData robRedayData08;
+    public RobReadyData robRedayData12;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

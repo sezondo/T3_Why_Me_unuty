@@ -5,13 +5,13 @@ using System.Collections;
 
 public class Rob08Bullets : Bullets
 {
-    public ParticleSystem flameParticleFire;
-    public ParticleSystem flameParticleSmoke;
-    public ParticleSystem flameParticleBits;
+    [SerializeField] private ParticleSystem flameParticleFire;
+    [SerializeField] private ParticleSystem flameParticleSmoke;
+    [SerializeField] private ParticleSystem flameParticleBits;
     private List<GameObject> damagedTargets;
     [HideInInspector] public float attackTime;
-    public AudioClip audioClipFire;
-    public AudioSource audioSource;
+    [SerializeField] private AudioClip audioClipFire;
+    [SerializeField] private AudioSource audioSource;
 
     public void OnEnable()
     {

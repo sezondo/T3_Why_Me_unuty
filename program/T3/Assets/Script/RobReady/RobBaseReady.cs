@@ -3,7 +3,7 @@ using UnityEngine;
 public class RobBaseReady : MonoBehaviour
 {
     public ReadyUnitState readyState;
-    public RobRedayData robRedayData;
+    public RobReadyData robRedayData;
     
 
 

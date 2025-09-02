@@ -2,17 +2,16 @@ using UnityEngine;
 
 public class TouchCameraController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float minVelocity = 0.01f;
-    public float friction = 0.9f;
-    public float zoomSpeed = 10f;
-    public float minZoom = 5f;
-    public float maxZoom = 20f;
-
-    public float xLimit_left = 10;
-    public float xLimit_right = 10;
-    public float zLimit_left = 10;
-    public float zLimit_right = 50;
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float minVelocity = 0.01f;
+    [SerializeField] private float friction = 0.9f;
+    [SerializeField] private float zoomSpeed = 10f;
+    [SerializeField] private float minZoom = 5f;
+    [SerializeField] private float maxZoom = 20f;
+    [SerializeField] private float xLimit_left = 10;
+    [SerializeField] private float xLimit_right = 10;
+    [SerializeField] private float zLimit_left = 10;
+    [SerializeField] private float zLimit_right = 50;
 
     private Vector2 lastTouchPos;
     private bool isDragging = false;

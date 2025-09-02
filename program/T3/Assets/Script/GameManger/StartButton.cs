@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 public class StartButton : MonoBehaviour
 {
 
-    public Text uiText;
-    public float fadeSpeed = 1.5f;
+    [SerializeField] private Text uiText;
+    [SerializeField] private float fadeSpeed = 1.5f;
     private bool fadingOut = true;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

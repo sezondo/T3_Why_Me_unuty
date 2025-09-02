@@ -6,8 +6,8 @@ public class Bullets : MonoBehaviour
     [HideInInspector] public float lifeTime;
     [HideInInspector] public int damage;
     [HideInInspector] public FactionType factionType;
-    public BulletData bulletData;
     [SerializeField] private GameObject hitPrefab;
+    public BulletData bulletData;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public virtual void Start()
     {
@@ -21,7 +21,7 @@ public class Bullets : MonoBehaviour
         {
             gameObject.layer = LayerMask.NameToLayer("Ally");
         }
-        else if(bulletData.faction == FactionType.Enemy)
+        else if (bulletData.faction == FactionType.Enemy)
         {
             gameObject.layer = LayerMask.NameToLayer("Enemy");
         }

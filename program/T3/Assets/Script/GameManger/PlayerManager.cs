@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
-    public int clearNumber;
+    [HideInInspector] public int clearNumber;
     private const string KEY_CLEAR = "pm_clearNumber";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

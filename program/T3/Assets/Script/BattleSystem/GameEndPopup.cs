@@ -5,12 +5,11 @@ using UnityEngine.UI;
 
 public class GameEndPopup : MonoBehaviour
 {
-    public Image winImage;
-    public Image lossImage;
-    private bool isTween;
+    [SerializeField] private Image winImage;
+    [SerializeField] private Image lossImage;
     [SerializeField] private AudioClip winClip;
     [SerializeField] private AudioClip lossClip;
-
+    private bool isTween;
 
 
     // Start is called once before 

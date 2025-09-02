@@ -6,7 +6,7 @@ public class BattleManager : MonoBehaviour
 {
     [SerializeField] private LayerMask allyLayerMask;
     [SerializeField] private LayerMask enemyLayerMask;
-    public BattleState battleState;
+    [HideInInspector] public BattleState battleState;
     public static BattleManager instance;
     private bool isCoroutine;
     // Start is called once before the first execution of Update after the MonoBehaviour is created

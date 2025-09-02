@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class UIControl : MonoBehaviour
 {
-    public GameObject selectStage;
-    public GameObject robGameObject;
-    public GameObject selectedStage;
+    [SerializeField] private GameObject selectStage;
+    [SerializeField] private GameObject robGameObject;
+    [SerializeField] private GameObject selectedStage;
     private Carousel carousel;
     private int carouseSelet;
     public GameObject[] StageContor;
