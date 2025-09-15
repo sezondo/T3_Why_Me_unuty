@@ -7,7 +7,7 @@ public class RobAttack : MonoBehaviour, IAttack
     [HideInInspector] public Animator animator;
     [HideInInspector] public RobShooter[] shooter;
     [HideInInspector] public bool CoroutineCheck;
-    public AudioClip attackAudioClip;
+    //public AudioClip attackAudioClip;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public virtual void Start()
     {
@@ -82,7 +82,7 @@ public class RobAttack : MonoBehaviour, IAttack
     }
 
     public virtual void Fire() {
-        SoundManager.instance.PlaySFX(attackAudioClip, this.transform);
+        SoundManager.instance.PlaySFX(robBase.data.attackAudioClip, this.transform);
         foreach (var fp in shooter)
         {
             fp.Stoot();

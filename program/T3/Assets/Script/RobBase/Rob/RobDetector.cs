@@ -17,16 +17,18 @@ public class RobDetector : MonoBehaviour
     {
         robBase = GetComponent<RobBase>();
         robMove = GetComponent<RobMove>();
-        StartCoroutine(Detector());
+
 
         if (robBase.data.faction == FactionType.Ally)
         {
-            layerMask = LayerMask.GetMask("Enemy","Wall");
+            layerMask = LayerMask.GetMask("Enemy", "Wall");
         }
         else if (robBase.data.faction == FactionType.Enemy)
         {
-            layerMask = LayerMask.GetMask("Ally","Wall");
+            layerMask = LayerMask.GetMask("Ally", "Wall");
         }
+
+        StartCoroutine(Detector());
     }
 
     // Update is called once per frame
@@ -84,7 +86,9 @@ public class RobDetector : MonoBehaviour
 
         if (Physics.Raycast(transform.position + Vector3.up * 1f, dir, out hit, attackRange, layerMask))
         {
-            Debug.Log($"[{name}] Raycast: HIT {hit.collider.name}");//로그지옥이당
+#if UNITY_EDITOR
+            Debug.Log($"[{name}] Raycast: HIT {hit.collider.name}");// 디버그용 로그
+#endif
 
 
             RobBase enemy = hit.collider.GetComponent<RobBase>();
@@ -95,7 +99,7 @@ public class RobDetector : MonoBehaviour
             }
             else if (enemy == null || enemy.data.faction == robBase.data.faction)
             {
-                
+
                 MissingTarget();
             }
         }
@@ -103,7 +107,9 @@ public class RobDetector : MonoBehaviour
         {
             MissingTarget();
         }
-        DrawDebugRay(transform.position, dir, attackRange); // 이건 디버그용
+#if UNITY_EDITOR
+        DrawDebugRay(transform.position, dir, attackRange); // scene창에서 확인용
+#endif
     }
 
     private void MissingTarget()
@@ -113,7 +119,7 @@ public class RobDetector : MonoBehaviour
 
         isDetecting = false;
     }
-    
+
     private void DrawDebugRay(Vector3 origin, Vector3 dir, float length)
     {
         Debug.DrawRay(origin + Vector3.up * 1f, dir * length, Color.red, 0.2f); // 0.2초 동안 씬 뷰에서 보임

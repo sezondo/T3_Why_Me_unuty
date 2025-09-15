@@ -13,6 +13,8 @@ public class RobData : ScriptableObject
     public float RotationThreshold;
     public FactionType faction;
     public GameObject bulletPrefab;
+    public AudioClip dieAudioClip;
+    public AudioClip attackAudioClip;
 
 
 }

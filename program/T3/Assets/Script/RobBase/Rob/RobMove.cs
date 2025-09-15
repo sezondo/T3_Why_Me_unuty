@@ -62,8 +62,6 @@ public class RobMove : MonoBehaviour
     {
         while (true)
         {
-            //여기는 네비게이션 매쉬 감지하는 쪽
-            //if (robBase.currentState == UnitState.Moving || robBase.currentState == UnitState.Idle)
             if (robBase.currentState != UnitState.Dead)
             {
                 TrackTarget();
@@ -104,9 +102,8 @@ public class RobMove : MonoBehaviour
         }
     }
 
-    public Transform FindNearestEnemyInRange()//Moving면 1초 간격으로 추적 
+    public Transform FindNearestEnemyInRange()
     {
-        //이건 가장 가까운놈 찾는거 이것도 항상 돌아가서 추적함
         RobBase[] enemies = FindObjectsByType<RobBase>(FindObjectsSortMode.None);
         Transform nearest = null;
         float minDist = Mathf.Infinity;
@@ -126,22 +123,24 @@ public class RobMove : MonoBehaviour
         //즉 추적은 계속 하는데 판단은 RobDetector에서 함
         return nearest;
     }
+    
     public void TryStartRotation()
     {
         if (rotationCoroutine != null)
-        StopCoroutine(rotationCoroutine);
+            StopCoroutine(rotationCoroutine);
 
         robBase.ChangeState(UnitState.Turn);
         rotationCoroutine = StartCoroutine(TargetRotation());
     }
 
+            //이건 네비게이트와 무관하게 아군을 로테이트 시키는 함수임
+            //어차피 발동조건이 레이케스트 걸렸을때라가지고 네비매쉬랑 안겹침
+            //위에서 상태에 따라서 내비매쉬 파라미터인 정지 거리를 늘렸다 주렸다함
+
     public IEnumerator TargetRotation()
     {
         while (true)
         {
-            //이건 네비게이트와 무관하게 아군을 로테이트 시키는 함수임
-            //어차피 발동조건이 레이케스트 걸렸을때라가지고 네비매쉬랑 안겹침
-            //위에서 상태에 따라서 내비매쉬 파라미터인 정지 거리를 늘렸다 주렸다함
             isTargetRotation = true;
             Vector3 direction = (currentTarget.position - transform.position).normalized;
             direction.y = 0f;
@@ -154,11 +153,10 @@ public class RobMove : MonoBehaviour
             {
                 robBase.ChangeState(UnitState.Attacking);
                 isTargetRotation = false;
-                
+
                 yield break;
             }
-
-
+            
             yield return null;
         }
     }

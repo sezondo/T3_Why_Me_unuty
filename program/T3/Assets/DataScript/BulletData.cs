@@ -9,5 +9,4 @@ public class BulletData : ScriptableObject
     public int bulletDamage;
     public float arcHeight;
     public float explosionRadius;
-    //public GameObject bulletPrefab;
 }

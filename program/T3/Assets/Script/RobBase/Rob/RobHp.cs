@@ -5,7 +5,7 @@ public class RobHp : MonoBehaviour
     private int currentHp;
     private RobBase robBase;
     private Animator animator;
-    [SerializeField] private AudioClip dieAudioClip;
+    //[SerializeField] private AudioClip dieAudioClip;
 
     bool die; //임시 조치
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -96,7 +96,7 @@ public class RobHp : MonoBehaviour
 
     private IEnumerator TakeDieWait()
     {
-        SoundManager.instance.PlaySFX(dieAudioClip, transform);
+        SoundManager.instance.PlaySFX(robBase.data.dieAudioClip, transform);
 
         yield return new WaitForSeconds(5f);
 
