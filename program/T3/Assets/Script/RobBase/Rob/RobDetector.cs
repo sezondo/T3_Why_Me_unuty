@@ -54,9 +54,6 @@ public class RobDetector : MonoBehaviour
             case UnitState.Turn:
 
                 break;
-            case UnitState.Hurt:
-
-                break;
 
         }
     }

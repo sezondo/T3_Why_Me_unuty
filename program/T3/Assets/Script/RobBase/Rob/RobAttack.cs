@@ -52,9 +52,6 @@ public class RobAttack : MonoBehaviour, IAttack
 
                 break;
 
-            case UnitState.Hurt:
-
-                break;
         }
     }
 

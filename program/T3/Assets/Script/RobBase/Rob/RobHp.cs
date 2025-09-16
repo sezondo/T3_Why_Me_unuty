@@ -46,9 +46,6 @@ public class RobHp : MonoBehaviour
             case UnitState.Turn:
 
                 break;
-            case UnitState.Hurt:
-
-                break;
 
         }
 

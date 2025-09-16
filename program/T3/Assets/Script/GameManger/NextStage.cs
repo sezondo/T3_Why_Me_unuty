@@ -23,8 +23,7 @@ public class NextStage : MonoBehaviour
             }
             else
             {
-                Debug.Log("게임끝");
-                //SceneManager.LoadScene("MainScene"); 
+                Debug.Log("게임 종료");
             }
         }
         else

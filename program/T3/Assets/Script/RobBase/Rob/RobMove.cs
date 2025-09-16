@@ -50,10 +50,6 @@ public class RobMove : MonoBehaviour
                 agent.stoppingDistance = robBase.data.attackIntersection;
                 break;
 
-            case UnitState.Hurt:
-
-                break;
-
         }
     }
 
