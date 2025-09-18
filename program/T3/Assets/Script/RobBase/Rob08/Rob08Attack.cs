@@ -39,7 +39,7 @@ public class Rob08Attack : RobAttack
     {
         foreach (var fp in rob08Shooter)
         {
-            fp.Stoot();
+            fp.Shoot();
         }
     }
     private void FireStop()

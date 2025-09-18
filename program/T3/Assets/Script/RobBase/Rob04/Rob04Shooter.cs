@@ -12,7 +12,7 @@ public class Rob04Shooter : RobShooter
         robMove = GetComponentInParent<RobMove>();
     }
 
-    public override void Stoot()
+    public override void Shoot()
     {
         GameObject missile;
         missile = Instantiate(base.robBase.data.bulletPrefab, transform.position, transform.rotation);

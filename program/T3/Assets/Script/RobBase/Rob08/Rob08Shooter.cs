@@ -13,7 +13,7 @@ public class Rob08Stooter : RobShooter
         base.Start();
         
     }
-    public override void Stoot()
+    public override void Shoot()
     {
         if (rob08Bullets != null)
         {

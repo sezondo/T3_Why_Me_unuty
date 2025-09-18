@@ -17,7 +17,7 @@ public class RobShooter : MonoBehaviour, IShooter
 
     }
 
-    public virtual void Stoot()
+    public virtual void Shoot()
     {
         Instantiate(robBase.data.bulletPrefab, transform.position, transform.rotation);
     }

@@ -82,7 +82,7 @@ public class RobAttack : MonoBehaviour, IAttack
         SoundManager.instance.PlaySFX(robBase.data.attackAudioClip, this.transform);
         foreach (var fp in shooter)
         {
-            fp.Stoot();
+            fp.Shoot();
         }
     }
     
