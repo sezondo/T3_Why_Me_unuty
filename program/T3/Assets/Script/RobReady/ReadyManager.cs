@@ -25,7 +25,7 @@ public class ReadyManager : MonoBehaviour
     public LevelData levelData;
     [SerializeField] private LayerMask allyLayerMask;
     public ReadyManagerState readyManagerState;
-    [HideInInspector] public int currentCost;
+    [HideInInspector] public float currentCost;
     [SerializeField] private Text currentCostText;
     [SerializeField] private AudioClip popupClip;
     [SerializeField] private AudioClip dropClip;

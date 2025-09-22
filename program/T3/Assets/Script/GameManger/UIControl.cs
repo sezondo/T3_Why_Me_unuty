@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class UIControl : MonoBehaviour
 {
-    [SerializeField] private GameObject selectStage;
+    [SerializeField] private GameObject SoloSelectStage;
+    [SerializeField] private GameObject MultiSelectStage;
     [SerializeField] private GameObject robGameObject;
     [SerializeField] private GameObject selectedStage;
     private Carousel carousel;
@@ -17,23 +18,30 @@ public class UIControl : MonoBehaviour
     {
         carousel = selectedStage.GetComponent<Carousel>();
 
-        
+
         for (int i = 0; i < PlayerManager.instance.clearNumber; i++)
         {
             StageContor[i].SetActive(false);
-            
+
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         Debug.Log(carousel.currentSelected);
         Debug.Log(PlayerManager.instance.clearNumber);
+        */
     }
-    public void PressStart()
+    public void SoloPlayStart()
     {
-        selectStage.SetActive(true);
+        SoloSelectStage.SetActive(true);
+        robGameObject.SetActive(false);
+    }
+    public void MultiPlayStart()
+    {
+        MultiSelectStage.SetActive(true);
         robGameObject.SetActive(false);
     }
 
@@ -69,6 +77,13 @@ public class UIControl : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public void Backwards()
+    {
+        MultiSelectStage.SetActive(false);
+        SoloSelectStage.SetActive(false);
+        robGameObject.SetActive(true);
     }
     
 }
