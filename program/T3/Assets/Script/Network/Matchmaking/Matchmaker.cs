@@ -9,7 +9,7 @@ public class Matchmaker : MonoBehaviour, INetworkRunnerCallbacks
 {
     //[Header("Settings")]
     [SerializeField] private int requiredPlayers = 2;        // 2인 매칭
-    [SerializeField] private SceneRef battleScene;
+    [SerializeField] private List<string> battleSceneNames;
    // [SerializeField] private string battleSceneName = "BattleScene";
 
     public event Action<MatchStatus> OnStatusChanged;
@@ -62,20 +62,19 @@ public class Matchmaker : MonoBehaviour, INetworkRunnerCallbacks
         if (r.IsServer && r.ActivePlayers.Count() >= requiredPlayers)
         {
             OnStatusChanged?.Invoke(MatchStatus.Starting);
-
-            // 이제 battleScene 변수를 직접 사용합니다.
-            await r.LoadScene(battleScene);
-
+            Debug.Log("string 제대로 들갔남?" + battleSceneNames[bossId]);
+            await runner.LoadScene(battleSceneNames[bossId]);
         }
     }
 
     public void OnPlayerLeft(NetworkRunner r, PlayerRef player) { }
     public void OnConnectedToServer(NetworkRunner r) { }
-    public void OnDisconnectedFromServer(NetworkRunner r)
+    public void OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason)
     {
         OnStatusChanged?.Invoke(MatchStatus.Disconnected);
         started = false;
     }
+
     public void OnShutdown(NetworkRunner r, ShutdownReason reason)
     {
         Debug.Log($"[Matchmaker] Shutdown: {reason}");
@@ -106,11 +105,16 @@ public class Matchmaker : MonoBehaviour, INetworkRunnerCallbacks
         finally { started = false; }
     }
 
-    public void OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason) { }
-
     public void OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request, byte[] token)
     {
-         request.Accept();
+        if (runner.ActivePlayers.Count() >= requiredPlayers)
+        {
+            request.Refuse();
+        }
+        else
+        {
+            request.Accept();
+        }
     }
      public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
     public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList) { }

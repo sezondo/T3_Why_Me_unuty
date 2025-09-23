@@ -22,7 +22,6 @@ public class UIControl : MonoBehaviour
         for (int i = 0; i < PlayerManager.instance.clearNumber; i++)
         {
             StageContor[i].SetActive(false);
-
         }
     }
 
