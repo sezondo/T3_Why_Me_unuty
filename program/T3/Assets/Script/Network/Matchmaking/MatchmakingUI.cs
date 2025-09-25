@@ -58,13 +58,15 @@ public class MatchmakingUI : MonoBehaviour
         switch (status)
         {
             case MatchStatus.Searching:
-                _animationCoroutine = StartCoroutine(AnimateEllipsis("Searching"));
-                break;
-            case MatchStatus.RoomCreated:
                 _animationCoroutine = StartCoroutine(AnimateEllipsis("Waiting"));
                 break;
+            case MatchStatus.RoomCreated:
+                _animationCoroutine = StartCoroutine(AnimateEllipsis("Searching"));
+                break;
             case MatchStatus.JoinedRoom:   statusText.text = "Joining..."; break;
-            case MatchStatus.PlayerJoined: statusText.text = "Ready"; break;
+            case MatchStatus.PlayerJoined:
+                _animationCoroutine = StartCoroutine(AnimateEllipsis("Searching"));
+                break;
             case MatchStatus.Starting:     statusText.text = "Starting..."; break;
             case MatchStatus.Failed:       statusText.text = "Failed"; break;
             case MatchStatus.Disconnected: statusText.text = "Disconnected"; break;
