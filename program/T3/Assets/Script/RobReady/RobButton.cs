@@ -79,7 +79,7 @@ public class RobButton : MonoBehaviour
         Drop(previewUnitPrefab012);
     }
 
-    private void Drop(GameObject previewUnitPrefab)
+    public virtual void Drop(GameObject previewUnitPrefab)
     {
         if (!ReadyManager.instance.useButton)
         {
