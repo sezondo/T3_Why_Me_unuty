@@ -86,7 +86,6 @@ public class RobButton : MonoBehaviour
             ReadyManager.instance.useButton = true;
             Instantiate(previewUnitPrefab);
         }
-        
     }
 
     

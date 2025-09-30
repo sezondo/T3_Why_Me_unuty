@@ -28,12 +28,18 @@ public enum MatchStatus
 /// </summary>
 public class Matchmaker : MonoBehaviour, INetworkRunnerCallbacks
 {
+    // 어디서든 접근 가능한 Runner 속성
+    public static NetworkRunner Runner { get; private set; }
+
     // --- Inspector-assigned Fields ---
     [SerializeField]
     private List<SceneRef> battleScenes; // 인스펙터에서 할당할 보스 전투 씬 목록
 
     [SerializeField]
     private int requiredPlayers = 2; // 게임 시작에 필요한 플레이어 수
+
+    [SerializeField]
+    private NetworkObject playerPrefab; // 유니티 에디터에서 NetworkPlayer 프리팹을 할당해야 합니다.
 
     // --- Public Events ---
     public event Action<MatchStatus> OnStatusChanged;
@@ -83,6 +89,10 @@ public class Matchmaker : MonoBehaviour, INetworkRunnerCallbacks
         // --- Runner GameObject 생성 및 설정 ---
         var runnerGo = new GameObject("Runner");
         _runner = runnerGo.AddComponent<NetworkRunner>();
+
+        // 생성된 _runner를 정적 속성에 할당
+        Runner = _runner;
+
         _runner.AddCallbacks(this);
 
         // Matchmaker와 Runner가 씬 전환 시 파괴되지 않도록 설정
@@ -110,10 +120,10 @@ public class Matchmaker : MonoBehaviour, INetworkRunnerCallbacks
             }
         };
 
-        var result = await _runner.StartGame(startGameArgs);
+        var result = await _runner.StartGame(startGameArgs); //네트워크 러너가 이걸로 게임 시작함
 
         // --- 결과 처리 ---
-        if (!result.Ok)
+        if (!result.Ok) //뭐 이상한 이유로 게임 시작 실패하면 이거임
         {
             Debug.LogError($"[매치메이커] 게임 시작에 실패했습니다. 사유: {result.ShutdownReason}");
             OnStatusChanged?.Invoke(MatchStatus.Failed);
@@ -131,6 +141,10 @@ public class Matchmaker : MonoBehaviour, INetworkRunnerCallbacks
 
         if (_runner != null && _runner.IsServer)
         {
+            // 호스트 자신의 NetworkPlayer 스폰
+            Debug.Log("[매치메이커] 호스트의 NetworkPlayer를 스폰합니다.");
+            _runner.Spawn(playerPrefab, Vector3.zero, Quaternion.identity, _runner.LocalPlayer);
+
             var localPlayerExists = _runner.ActivePlayers.Any(p => p == _runner.LocalPlayer);
             Debug.Log($"[매치메이커] 호스트 자신의 플레이어 존재 여부 확인: {localPlayerExists}");
 
@@ -205,13 +219,17 @@ public class Matchmaker : MonoBehaviour, INetworkRunnerCallbacks
 
     // --- INetworkRunnerCallbacks Implementation ---
 
-    public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
+    public void OnPlayerJoined(NetworkRunner runner, PlayerRef player) //이미 세션이 존재하는곳에 참가할때 호출
     {
         int activeCount = runner.ActivePlayers.Count();
         Debug.Log($"[매치메이커] 새로운 플레이어 참가. 플레이어 ID: {player}, 현재 플레이어: {activeCount}명");
 
-        if (runner.IsServer)
+        if (runner.IsServer)//클라이언트용 근데 서버가 만듬
         {
+            // 새로 참가한 플레이어를 위한 NetworkPlayer 스폰
+            Debug.Log($"[매치메이커] 새로 참가한 플레이어({player})의 NetworkPlayer를 스폰합니다.");
+            runner.Spawn(playerPrefab, Vector3.zero, Quaternion.identity, player);
+
             OnStatusChanged?.Invoke(MatchStatus.PlayerJoined);
             // 새 플레이어가 참가했으므로 게임 시작 조건 확인
             _ = TryStartGameAsync(runner);
@@ -257,6 +275,12 @@ public class Matchmaker : MonoBehaviour, INetworkRunnerCallbacks
             Destroy(runner.gameObject);
         }
         _runner = null;
+
+        // 정적 참조도 정리
+        if (runner == Runner)
+        {
+            Runner = null;
+        }
 
         // 사용자가 직접 정상 종료한 경우가 아니라면, 자동 재매치를 시도합니다.
         if (shutdownReason != ShutdownReason.Ok)
