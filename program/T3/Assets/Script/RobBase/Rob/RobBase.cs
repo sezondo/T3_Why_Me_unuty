@@ -1,6 +1,7 @@
 using UnityEngine;
+using Fusion;
 
-public class RobBase : MonoBehaviour
+public class RobBase : NetworkBehaviour
 {
     public RobData data;
     public UnitState currentState;

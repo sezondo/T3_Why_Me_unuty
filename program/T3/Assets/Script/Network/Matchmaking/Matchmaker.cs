@@ -143,7 +143,13 @@ public class Matchmaker : MonoBehaviour, INetworkRunnerCallbacks
         {
             // 호스트 자신의 NetworkPlayer 스폰
             Debug.Log("[매치메이커] 호스트의 NetworkPlayer를 스폰합니다.");
-            _runner.Spawn(playerPrefab, Vector3.zero, Quaternion.identity, _runner.LocalPlayer);
+            NetworkObject hostObject = _runner.Spawn(playerPrefab, Vector3.zero, Quaternion.identity, _runner.LocalPlayer);
+            NetworkPlayer networkPlayerHost = hostObject.GetComponent<NetworkPlayer>();
+
+            if (networkPlayerHost != null)
+            {
+                networkPlayerHost.SetPlayerSide(PlayerSide.Host);
+            }
 
             var localPlayerExists = _runner.ActivePlayers.Any(p => p == _runner.LocalPlayer);
             Debug.Log($"[매치메이커] 호스트 자신의 플레이어 존재 여부 확인: {localPlayerExists}");
@@ -228,7 +234,14 @@ public class Matchmaker : MonoBehaviour, INetworkRunnerCallbacks
         {
             // 새로 참가한 플레이어를 위한 NetworkPlayer 스폰
             Debug.Log($"[매치메이커] 새로 참가한 플레이어({player})의 NetworkPlayer를 스폰합니다.");
-            runner.Spawn(playerPrefab, Vector3.zero, Quaternion.identity, player);
+            NetworkObject clientObject = runner.Spawn(playerPrefab, Vector3.zero, Quaternion.identity, player);
+
+            NetworkPlayer networkPlayerClient = clientObject.GetComponent<NetworkPlayer>();
+
+            if (networkPlayerClient != null)
+            {
+                networkPlayerClient.SetPlayerSide(PlayerSide.Client);
+            }
 
             OnStatusChanged?.Invoke(MatchStatus.PlayerJoined);
             // 새 플레이어가 참가했으므로 게임 시작 조건 확인
