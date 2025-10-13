@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using Fusion;
 
 
-public class RobMove : MonoBehaviour
+public class RobMove : NetworkBehaviour
 {
     private RobBase robBase;
     private RobDetector robDetector;
@@ -12,7 +13,7 @@ public class RobMove : MonoBehaviour
     private bool isTargetRotation;
     private Coroutine rotationCoroutine;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public virtual void Start()
     {
         robBase = GetComponent<RobBase>();
         robDetector = GetComponent<RobDetector>();

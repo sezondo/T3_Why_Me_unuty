@@ -1,8 +1,9 @@
 using UnityEngine;
 using System.Collections;
+using Fusion;
 
 
-public class RobDetector : MonoBehaviour
+public class RobDetector : NetworkBehaviour
 {
 
     [HideInInspector]public RobBase robBase;

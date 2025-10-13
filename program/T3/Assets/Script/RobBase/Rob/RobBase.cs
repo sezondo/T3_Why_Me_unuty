@@ -1,10 +1,11 @@
 using UnityEngine;
 using Fusion;
+using Unity.VisualScripting;
 
 public class RobBase : NetworkBehaviour
 {
     public RobData data;
-    public UnitState currentState;
+    public UnitState currentState{ get; private set; }
     private Animator animator;
     private Collider unitCollider;
     private Rigidbody rb;
