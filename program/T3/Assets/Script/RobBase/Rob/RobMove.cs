@@ -28,6 +28,11 @@ public class RobMove : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (robBase == null)
+        {
+            return;
+        }
+
         switch (robBase.currentState)
         {
             case UnitState.Idle:

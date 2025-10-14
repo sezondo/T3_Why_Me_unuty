@@ -10,13 +10,13 @@ public class RobBaseNet : RobBase
     private bool IsServer => Object.HasStateAuthority;
 
     // 네트워크 속성의 변경을 감지하는 ChangeDetector
-    private ChangeDetector _changeDetector;
+    //private ChangeDetector _changeDetector;
 
     public override void Spawned()
     {
         // ChangeDetector를 초기화합니다.
         // Source를 SimulationState로 설정하여 FixedUpdateNetwork에서 변경된 값을 기준으로 감지합니다.
-        _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
+        //_changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
     }
 
     // Fusion의 네트워크 업데이트 루프입니다.
@@ -33,15 +33,7 @@ public class RobBaseNet : RobBase
 
         }
 
-        //클라에 전파
-        foreach (var propertyName in _changeDetector.DetectChanges(this))
-        {
-            // SyncedState 속성에 변경이 있었는지 확인합니다.
-            if (propertyName == nameof(SyncedState))
-            {
-                ChangeState(SyncedState);
-            }
-        }
+        
             
     }
 
@@ -49,7 +41,15 @@ public class RobBaseNet : RobBase
     // FixedUpdateNetwork보다 더 자주 호출되어 부드러운 움직임을 보장합니다.
     public override void Render()
     {
-        // 일단 대기
+        //클라에 전파
+        if (!IsServer)
+        {
+            if (currentState != SyncedState)
+            {
+                ChangeState(SyncedState);
+            }
+        }
+        
     }
 
    

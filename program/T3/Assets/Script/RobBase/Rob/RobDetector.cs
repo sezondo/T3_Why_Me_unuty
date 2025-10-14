@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using Fusion;
+using Unity.VisualScripting;
 
 
 public class RobDetector : NetworkBehaviour
@@ -30,11 +31,18 @@ public class RobDetector : NetworkBehaviour
         }
 
         StartCoroutine(Detector());
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (robBase == null)
+        {
+            return;
+        }
+
         switch (robBase.currentState)
         {
             case UnitState.Idle:

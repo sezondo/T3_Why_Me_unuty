@@ -1,17 +1,32 @@
 using UnityEngine;
+using System.Collections;
 
 public class RobMoveNet : RobMove
 {
-    private bool IsServer => GetComponent<RobBaseNet>()?.Object.HasStateAuthority ?? false;
+    private bool IsServer => robBaseNetCash != null && robBaseNetCash.Object.HasStateAuthority;
+    private RobBaseNet robBaseNetCash;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public void Awake()
+    {
+        robBaseNetCash = GetComponent<RobBaseNet>();
+
+    }
     public override void Start()
     {
+
+        StartCoroutine(DelayedStart());
+    }
+    private IEnumerator DelayedStart()
+    {
+        yield return new WaitUntil(() => robBaseNetCash.Object != null);
+        
         if (!IsServer)
         {
             StopAllCoroutines();
             this.enabled = false;
-            return;
+            yield break;
         }
-
+        
         base.Start();
     }
 
