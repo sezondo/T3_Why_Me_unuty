@@ -1,15 +1,16 @@
 using UnityEngine;
 using System.Collections;
-public class RobHp : MonoBehaviour
+using Fusion;
+public class RobHp : NetworkBehaviour
 {
-    private int currentHp;
-    private RobBase robBase;
+    protected int currentHp;
+    protected RobBase robBase;
     private Animator animator;
     //[SerializeField] private AudioClip dieAudioClip;
 
     bool die; //임시 조치
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public virtual void Start()
     {
         robBase = GetComponent<RobBase>();
 
@@ -23,7 +24,7 @@ public class RobHp : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
 
         switch (robBase.currentState)
@@ -51,14 +52,18 @@ public class RobHp : MonoBehaviour
 
         if (currentHp <= 0 && robBase.currentState != UnitState.Dead)
         {
-            animator.SetTrigger("Death");
-            currentHp = 0;
-            robBase.ChangeState(UnitState.Dead);
-            StartCoroutine(TakeDieWait());
+            DeadDisposal();
         }
     }
+    public void DeadDisposal()
+    {
+        animator.SetTrigger("Death");
+        currentHp = 0;
+        robBase.ChangeState(UnitState.Dead);
+        StartCoroutine(TakeDieWait());
+    }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         if (robBase.currentState == UnitState.Dead) return;
 
@@ -86,8 +91,8 @@ public class RobHp : MonoBehaviour
             time += Time.deltaTime;
             yield return null;
         }
-        
-        Destroy(gameObject);
+
+        Destroy();
         transform.position = end;
     }
 
@@ -98,5 +103,10 @@ public class RobHp : MonoBehaviour
         yield return new WaitForSeconds(5f);
 
         StartCoroutine(TakeDie());
+    }
+
+    public virtual void Destroy()
+    {
+        Destroy(gameObject);
     }
 }
