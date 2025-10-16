@@ -1,17 +1,27 @@
 using UnityEngine;
+using System.Collections;
 using Fusion;
 
-public class Bullets : NetworkBehaviour
+public class BulletsNet : Bullets
 {
-    [SerializeField] protected float speed;
-    [SerializeField] protected float lifeTime;
-    [HideInInspector] public int damage;
-    [HideInInspector] public FactionType factionType;
-    [SerializeField] protected GameObject hitPrefab;
-    public BulletData bulletData;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public virtual void Start()
+    public override void Spawned()
     {
+        if (!Object.HasStateAuthority)
+        {
+            StopAllCoroutines();
+            this.enabled = false;
+            return;
+        }
+        base.Start();
+
+        StartCoroutine(DelayedStart());
+    }
+
+    public override void Start(){ }
+
+    private IEnumerator DelayedStart()
+    {
+
         speed = bulletData.bulletSpeed;
         lifeTime = bulletData.bulletLifeTime;
         damage = bulletData.bulletDamage;
@@ -27,17 +37,32 @@ public class Bullets : NetworkBehaviour
             gameObject.layer = LayerMask.NameToLayer("Enemy");
         }
 
-        Destroy(gameObject, lifeTime);
+        yield return new WaitForSeconds(lifeTime);
+
+        Runner.Despawn(Object);
     }
 
-    // Update is called once per frame
-    public virtual void Update()
+    public override void FixedUpdateNetwork()
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        if (Object.HasStateAuthority)
+        {
+            transform.Translate(Vector3.forward * speed * Runner.DeltaTime);
+        }
+        
     }
 
-    public virtual void OnTriggerEnter(Collider other)
+    public override void Update()
     {
+        return;
+    }
+
+    public override void OnTriggerEnter(Collider other)
+    {
+        if (!Object.HasStateAuthority)
+        {
+            return;
+        }
+
         if (other.gameObject.layer == gameObject.layer)
         {
             return;
@@ -57,16 +82,26 @@ public class Bullets : NetworkBehaviour
             if (robHp != null)
             {
                 robHp.TakeDamage(damage);
+                
                 DestroyBullet();
             }
         }
-
     }
-
-    public virtual void DestroyBullet()
+    
+    public override void DestroyBullet()
     {
-        Destroy(gameObject);
-        //여따가 사운드 매니저랑 이펙트 매니저 넣을껏
-        EffectManager.instance.PlayEffecting(hitPrefab, this.transform);
+        RPC_DestroyBullet();
     }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    public void RPC_DestroyBullet()
+    {
+        EffectManager.instance.PlayEffecting(hitPrefab, this.transform);
+
+        if (Object.HasStateAuthority)
+        {
+            Runner.Despawn(Object);
+        }
+    }
+    
 }

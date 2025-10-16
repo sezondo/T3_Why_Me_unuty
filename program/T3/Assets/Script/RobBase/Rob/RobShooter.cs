@@ -1,6 +1,7 @@
 using UnityEngine;
+using Fusion;
 
-public class RobShooter : MonoBehaviour, IShooter
+public class RobShooter : NetworkBehaviour, IShooter
 {
     public RobBase robBase;
     

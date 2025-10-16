@@ -6,12 +6,12 @@ public class RobBase : NetworkBehaviour
 {
     public RobData data;
     public UnitState currentState{ get; private set; }
-    private Animator animator;
-    private Collider unitCollider;
+    protected Animator animator;
+    protected Collider unitCollider;
     private Rigidbody rb;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
+    public virtual void Start()
     {
         animator = GetComponent<Animator>();
         currentState = UnitState.Idle;
@@ -34,7 +34,7 @@ public class RobBase : NetworkBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         switch (currentState)
         {

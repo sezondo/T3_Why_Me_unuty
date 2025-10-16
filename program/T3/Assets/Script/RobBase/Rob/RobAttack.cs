@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
+using Fusion;
 
-public class RobAttack : MonoBehaviour, IAttack
+public class RobAttack : NetworkBehaviour, IAttack
 {
     [HideInInspector] public RobBase robBase;
     [HideInInspector] public Animator animator;
@@ -17,7 +18,7 @@ public class RobAttack : MonoBehaviour, IAttack
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
 
         if (robBase.currentState == UnitState.Dead)

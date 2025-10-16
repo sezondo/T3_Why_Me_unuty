@@ -1,58 +1,40 @@
 using UnityEngine;
-using System.Collections;
 using Unity.VisualScripting;
 
 public class RobHpNet : RobHp
 {
-    private bool IsServer => robBaseNetCash != null && robBaseNetCash.Object.HasStateAuthority;
-    private RobBaseNet robBaseNetCash;
     private bool dieCheck;
 
-    public void Awake()
+    public override void Spawned()
     {
-        robBaseNetCash = GetComponent<RobBaseNet>();
         dieCheck = false;
-    }
 
-    public override void Start()
-    {
-        StartCoroutine(DelayedStart());
-    }
-
-    private IEnumerator DelayedStart()
-    {
-        yield return new WaitUntil(() => robBaseNetCash.Object != null);
-
-        if (!IsServer)
+        if (Object.HasStateAuthority)
         {
-            this.enabled = false;
-            yield break;
+            base.Start();
         }
-
-
-        base.Start();
     }
 
-    public override void Update()
+    public override void FixedUpdateNetwork()
     {
-        if (IsServer)
+        if (Object.HasStateAuthority)
         {
             if (currentHp <= 0 && robBase.currentState != UnitState.Dead)
             {
                 robBase.ChangeState(UnitState.Dead);
             }
         }
-
-        if (robBaseNetCash.currentState == UnitState.Dead && dieCheck == false)
+        if (robBase.currentState == UnitState.Dead && !dieCheck)
         {
             dieCheck = true;
             DeadDisposal();
         }
     }
+    
 
     public override void TakeDamage(int damage)
     {
-        if (!IsServer)
+        if (!Object.HasStateAuthority)
         {
             return;
         }
@@ -61,11 +43,12 @@ public class RobHpNet : RobHp
 
     public override void Destroy()
     {
-        if (IsServer)
+        if (Object.HasStateAuthority)
         {
             Runner.Despawn(Object);
         }
     }
 
-    
+    public override void Start() { }
+    public override void Update() { }
 }
