@@ -20,8 +20,14 @@ public class RobMoveNet : RobMove
 
         base.Start();
     }
-    
-    public override void Start(){ }
-    
 
+    public override void Start() { }
+
+    public override void Update()
+    {}
+
+    public override void FixedUpdateNetwork()
+    {
+        base.Update();
+    }
 }

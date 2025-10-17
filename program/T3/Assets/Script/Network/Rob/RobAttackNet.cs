@@ -12,6 +12,10 @@ public class RobAttackNet : RobAttack
     public override void Update(){}
     public override void FixedUpdateNetwork()
     {
+        
+    }
+    public override void Render()
+    {
         if (robBase.currentState == UnitState.Dead)
         {
             return;

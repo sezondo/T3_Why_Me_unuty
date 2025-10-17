@@ -28,6 +28,7 @@ public class RobBaseNet : RobBase
                 SyncedState = currentState;
             }
         }
+        
 
         switch (currentState)
         {
@@ -48,7 +49,7 @@ public class RobBaseNet : RobBase
                 break;
         }
 
-        animator.SetInteger("State", (int)currentState); // Attack 애니메이션은 트리거로 따로 관리
+        //animator.SetInteger("State", (int)currentState); // Attack 애니메이션은 트리거로 따로 관리
     }
 
     // Render는 시각적 업데이트를 처리하기에 가장 좋은 장소입니다.
@@ -63,7 +64,7 @@ public class RobBaseNet : RobBase
                 ChangeState(SyncedState);
             }
         }
-
+        animator.SetInteger("State", (int)currentState);
     }
 
     //public override void Awake() { }

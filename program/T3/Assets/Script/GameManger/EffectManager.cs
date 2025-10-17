@@ -9,7 +9,7 @@ public class EffectManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-
+            Debug.Log("[EffectManager] Awake: instance assigned.");
         }
         else
         {

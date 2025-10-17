@@ -7,7 +7,8 @@ public class RobAttack : NetworkBehaviour, IAttack
     [HideInInspector] public RobBase robBase;
     [HideInInspector] public Animator animator;
     [HideInInspector] public RobShooter[] shooter;
-    [HideInInspector] public bool CoroutineCheck;
+    //[HideInInspector] 
+    public bool CoroutineCheck;
     //public AudioClip attackAudioClip;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public virtual void Start()

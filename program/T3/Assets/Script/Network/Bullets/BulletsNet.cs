@@ -96,7 +96,14 @@ public class BulletsNet : Bullets
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     public void RPC_DestroyBullet()
     {
-        EffectManager.instance.PlayEffecting(hitPrefab, this.transform);
+        if (EffectManager.instance == null)
+        {
+            Debug.LogError("[BulletsNet] EffectManager.instance is null on this client!");
+        }
+        else
+        {
+            EffectManager.instance.PlayEffecting(hitPrefab, this.transform);
+        }
 
         if (Object.HasStateAuthority)
         {
