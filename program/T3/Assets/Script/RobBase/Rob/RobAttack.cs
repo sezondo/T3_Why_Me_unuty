@@ -7,6 +7,7 @@ public class RobAttack : NetworkBehaviour, IAttack
     [HideInInspector] public RobBase robBase;
     [HideInInspector] public Animator animator;
     [HideInInspector] public RobShooter[] shooter;
+    
     //[HideInInspector] 
     public bool CoroutineCheck;
     //public AudioClip attackAudioClip;
