@@ -5,7 +5,7 @@ public class RobHp : NetworkBehaviour
 {
     protected int currentHp;
     protected RobBase robBase;
-    private Animator animator;
+    protected Animator animator;
     //[SerializeField] private AudioClip dieAudioClip;
 
     bool die; //임시 조치
@@ -55,11 +55,11 @@ public class RobHp : NetworkBehaviour
             DeadDisposal();
         }
     }
-    public void DeadDisposal()
+    public virtual void DeadDisposal() // 죽음 효과 처리 시작 + 애니메이션 트리거
     {
         animator.SetTrigger("Death");
         currentHp = 0;
-        robBase.ChangeState(UnitState.Dead);
+        robBase.ChangeState(UnitState.Dead); // 클라에서 중복이 나긴 하지만 RobBase에서 어차피 막자나 이거 괜찮을듯
         StartCoroutine(TakeDieWait());
     }
 
@@ -71,7 +71,7 @@ public class RobHp : NetworkBehaviour
         currentHp -= damage;
     }
 
-    private IEnumerator TakeDie()
+    public virtual IEnumerator TakeDie()
     {
 
         float time = 0f;
@@ -96,7 +96,7 @@ public class RobHp : NetworkBehaviour
         transform.position = end;
     }
 
-    private IEnumerator TakeDieWait()
+    public IEnumerator TakeDieWait()
     {
         SoundManager.instance.PlaySFX(robBase.data.dieAudioClip, transform);
 
