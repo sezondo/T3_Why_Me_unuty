@@ -6,7 +6,7 @@ public class RobMoveNet : RobMove
 {
     public override void Spawned()
     {
-        if (!Object.HasStateAuthority)
+        if (!Object.HasStateAuthority) // 클라일때
         {
             var agent = GetComponent<NavMeshAgent>();
             if (agent != null)

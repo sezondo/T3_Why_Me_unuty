@@ -4,12 +4,17 @@ using Fusion;
 
 public class BulletsNet : Bullets
 {
+    [Networked] private TickTimer DespawnTimer { get; set; }
+    private bool pendingDespawn;
+    private Vector3 pendingHitPos;
+    
+    
     public override void Spawned()
     {
         if (!Object.HasStateAuthority)
         {
             StopAllCoroutines();
-            this.enabled = false;
+            //this.enabled = false;
             return;
         }
         base.Start();
@@ -44,10 +49,20 @@ public class BulletsNet : Bullets
 
     public override void FixedUpdateNetwork()
     {
-        if (Object.HasStateAuthority)
+
+        if (!Object.HasStateAuthority)
+            return;
+
+        if (pendingDespawn)
         {
-            transform.Translate(Vector3.forward * speed * Runner.DeltaTime);
+            if (DespawnTimer.Expired(Runner))
+            {
+                Runner.Despawn(Object);
+            }
+                return; // 더 이상 이동시키지 않음   
         }
+
+        transform.Translate(Vector3.forward * speed * Runner.DeltaTime);
         
     }
 
@@ -90,25 +105,22 @@ public class BulletsNet : Bullets
     
     public override void DestroyBullet()
     {
-        RPC_DestroyBullet();
+        if (!Object.HasStateAuthority) return;
+        pendingHitPos = transform.position;
+
+        RPC_DestroyBullet(pendingHitPos);
+
+        pendingDespawn = true;
+        DespawnTimer = TickTimer.CreateFromSeconds(Runner, 1); // 한 틱 지연
+    
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-    public void RPC_DestroyBullet()
+    public void RPC_DestroyBullet(Vector3 hitPos)
     {
-        if (EffectManager.instance == null)
+        if (EffectManager.instance != null && hitPrefab != null)
         {
-            Debug.LogError("[BulletsNet] EffectManager.instance is null on this client!");
-        }
-        else
-        {
-            EffectManager.instance.PlayEffecting(hitPrefab, this.transform);
-        }
-
-        if (Object.HasStateAuthority)
-        {
-            Runner.Despawn(Object);
+            EffectManager.instance.PlayEffect(hitPrefab, hitPos);
         }
     }
-    
 }

@@ -71,6 +71,14 @@ public class RobMove : NetworkBehaviour
             else
             {
                 StopMoving();
+
+                //네트워크 트랜스폼과 네비게이션 충돌 해결 파트 추가
+                if (agent != null && agent.enabled)
+                {
+                    agent.isStopped = true;
+                    agent.ResetPath();
+                    agent.enabled = false;
+                }
             }
 
             yield return new WaitForSeconds(0.2f);
@@ -143,6 +151,14 @@ public class RobMove : NetworkBehaviour
     {
         while (true)
         {
+            //동기화를 위한 방어코드
+            if (currentTarget == null)
+            {
+                robBase.ChangeState(UnitState.Idle);
+                isTargetRotation = false;
+                yield break;
+            }
+
             isTargetRotation = true;
             Vector3 direction = (currentTarget.position - transform.position).normalized;
             direction.y = 0f;
