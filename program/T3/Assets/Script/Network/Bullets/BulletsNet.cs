@@ -4,9 +4,9 @@ using Fusion;
 
 public class BulletsNet : Bullets
 {
-    [Networked] private TickTimer DespawnTimer { get; set; }
-    private bool pendingDespawn;
-    private Vector3 pendingHitPos;
+    [Networked] protected TickTimer DespawnTimer { get; set; }
+    protected bool pendingDespawn;
+    protected Vector3 pendingHitPos;
     
     
     public override void Spawned()
@@ -24,7 +24,7 @@ public class BulletsNet : Bullets
 
     public override void Start(){ }
 
-    private IEnumerator DelayedStart()
+    protected IEnumerator DelayedStart()
     {
 
         speed = bulletData.bulletSpeed;
@@ -109,14 +109,15 @@ public class BulletsNet : Bullets
         pendingHitPos = transform.position;
 
         RPC_DestroyBullet(pendingHitPos);
+        //NetworkBulletManager.instance.RPC_PlayerEffect(hitPrefab, pendingHitPos);
 
         pendingDespawn = true;
-        DespawnTimer = TickTimer.CreateFromSeconds(Runner, 1); // 한 틱 지연
+        DespawnTimer = TickTimer.CreateFromSeconds(Runner, 0.05f); // 한 틱 지연
     
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-    public void RPC_DestroyBullet(Vector3 hitPos)
+    private void RPC_DestroyBullet(Vector3 hitPos)
     {
         if (EffectManager.instance != null && hitPrefab != null)
         {

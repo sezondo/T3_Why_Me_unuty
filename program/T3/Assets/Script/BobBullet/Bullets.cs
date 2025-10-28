@@ -65,8 +65,9 @@ public class Bullets : NetworkBehaviour
 
     public virtual void DestroyBullet()
     {
-        Destroy(gameObject);
+
         //여따가 사운드 매니저랑 이펙트 매니저 넣을껏
         EffectManager.instance.PlayEffecting(hitPrefab, this.transform);
+        Destroy(gameObject);
     }
 }
