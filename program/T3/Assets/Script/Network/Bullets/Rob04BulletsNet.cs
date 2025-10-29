@@ -1,41 +1,43 @@
-using UnityEngine;
+﻿using UnityEngine;
 using DG.Tweening;
 using Fusion;
+
 
 public class Rob04BulletsNet : BulletsNet
 {
     [SerializeField] private AudioClip destAudioClip;
     [Networked] private Vector3 TargetPos { get; set; }
-    //[Networked] private NetworkBool HasTarget { get; set; }
-    [Networked] private NetworkBool ArcPrepared { get; set; }
-    private Tweener arcTween;
-    private bool arcStarted;
+    [Networked] private NetworkBool ArcPrepared { get; set; } //곡선 시작 플래그
+    [Networked] private Vector3 SpawnPos{ get; set; }
+    private Tweener arcTween; // 현재 진행중인 DOT윈
+    private bool arcStarted; // 곡물 구동 중복 방지 체크
+    private ChangeDetector _changeDetector;
 
     public override void Spawned()
     {
-
         base.Spawned();
 
-        
-        StartArc();
-        
+        _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
 
+        if (ArcPrepared) //네트워크값이 들어왔으면 바로 시작
+            StartArc();
     }
 
     public override void FixedUpdateNetwork()
     {
-        if (!arcStarted && ArcPrepared)
-        StartArc();
+        foreach (var changedName in _changeDetector.DetectChanges(this))
+        {
+            if (changedName == nameof(ArcPrepared) && ArcPrepared)
+                StartArc();
+        }
 
         if (pendingDespawn && DespawnTimer.Expired(Runner) && Object.HasStateAuthority)
             Runner.Despawn(Object);
-    
     }
-
 
     private void StartArc()
     {
-        if (arcStarted || !ArcPrepared)    // TargetPos 대신 ArcPrepared 플래그만 사용
+        if (arcStarted || !ArcPrepared) //값 들어왔나 체크 및 중복 체크
             return;
 
         arcStarted = true;
@@ -44,11 +46,17 @@ public class Rob04BulletsNet : BulletsNet
 
     private void PlayArc()
     {
-        Vector3 midPoint = (transform.position + TargetPos) * 0.5f
-                         + Vector3.up * bulletData.arcHeight;
+        Vector3 startPos = Object.HasStateAuthority ? transform.position : SpawnPos;
 
-        Vector3[] path = { transform.position, midPoint, TargetPos };
-        float distance = Vector3.Distance(transform.position, TargetPos);
+        if (startPos == Vector3.zero)
+            startPos = transform.position;
+        
+
+        Vector3 midPoint = (startPos + TargetPos) * 0.5f
+                           + Vector3.up * bulletData.arcHeight;
+
+        Vector3[] path = { startPos, midPoint, TargetPos };
+        float distance = Vector3.Distance(startPos, TargetPos);
         float duration = Mathf.Max(distance / bulletData.bulletSpeed, 0.01f);
 
         arcTween = transform.DOPath(path, duration, PathType.CatmullRom)
@@ -60,7 +68,6 @@ public class Rob04BulletsNet : BulletsNet
                     DestroyBullet();
             });
     }
-
 
     public override void DestroyBullet()
     {
@@ -82,24 +89,21 @@ public class Rob04BulletsNet : BulletsNet
         arcTween?.Kill();
 
         RPC_PlayImpact(hitPos);
-
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-    public void RPC_SetTarget(Vector3 targetPos)
+    public void RPC_SetTarget(Vector3 startPos, Vector3 targetPos)
     {
+        SpawnPos = startPos;
+        transform.position = startPos;
         TargetPos = targetPos;
         ArcPrepared = true;
-
-        if (!arcStarted)
-            StartArc();
-
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     public void RPC_PlayImpact(Vector3 hitPos)
     {
-        SoundManager.instance.PlaySFX(destAudioClip, this.transform);
+        SoundManager.instance.PlaySFX(destAudioClip, transform);
 
         if (EffectManager.instance != null && hitPrefab != null)
         {
@@ -107,17 +111,13 @@ public class Rob04BulletsNet : BulletsNet
         }
     }
 
-    
-
     public override void Update()
     {
-        //트랜스폼 이동 삭제
+        // intentionally left blank
     }
+
     public override void OnTriggerEnter(Collider other)
     {
-        //이놈도 삭제
+        // intentionally left blank
     }
-    
-
-    
 }

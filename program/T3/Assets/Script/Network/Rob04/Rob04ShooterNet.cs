@@ -17,17 +17,17 @@ public class Rob04ShooterNet : RobShooterNet
         if (!Object.HasStateAuthority)
             return;
 
+        Vector3 spawnPos = transform.position;
         Vector3 targetPos = robMove.currentTarget != null
             ? robMove.currentTarget.position
-            : transform.position;
+            : spawnPos;
 
         var missile = Runner.Spawn(
         robBase.data.bulletPrefab,
-        transform.position,
-        transform.rotation);
+        spawnPos);
 
         missile.GetComponent<Rob04BulletsNet>()
-           .RPC_SetTarget(targetPos);
+           .RPC_SetTarget(spawnPos, targetPos);
         /*
         NetworkObject missileNet;
         missileNet = Runner.Spawn(base.robBase.data.bulletPrefab, transform.position, transform.rotation);
