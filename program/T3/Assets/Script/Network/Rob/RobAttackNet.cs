@@ -6,10 +6,10 @@ public class RobAttackNet : RobAttack
 {
     // RPC 대신 네트워크로 동기화될 Tick 변수를 사용합니다.
     [Networked]
-    public int AttackTick { get; private set; }
+    public int AttackTick { get; protected set; }
 
     // 클라이언트에서 마지막으로 확인한 Tick 값을 저장하기 위한 로컬 변수입니다.
-    private int _lastAttackTick;
+    protected int _lastAttackTick;
 
     public override void Spawned()
     {
