@@ -5,38 +5,27 @@ using UnityEngine;
 
 public class Rob08AttackNet : RobAttackNet
 {
-    [HideInInspector] public Rob08StooterNet[] Rob08StooterNet;
+    [HideInInspector] public Rob08StooterNet[] rob08Shooters;
 
     public override void Spawned()
     {
-        animator = GetComponent<Animator>();
-        robBase = GetComponent<RobBase>();
-        Rob08StooterNet = GetComponentsInChildren<Rob08StooterNet>();
-
-        shooter = Rob08StooterNet; // 상위 Fire 루프와 Tick 동기화 유지
+        base.Spawned();
+        rob08Shooters = GetComponentsInChildren<Rob08StooterNet>(true);
+        shooter = rob08Shooters;
     }
 
     public override IEnumerator Attacking()
     {
-        while (true)
+        var interval = Mathf.Max(0.05f, robBase.data.attackSpeed);
+        while (Object && Object.IsValid && robBase.currentState == UnitState.Attacking)
         {
-            if (robBase.currentState == UnitState.Dead)
-            {
-                FireStop();
-                break;
-            }
-
-            if (robBase.currentState != UnitState.Attacking)
-            {
-                FireStop();
-                break;
-            }
-
             Fire();
-
-            yield return null;
+            yield return new WaitForSeconds(interval);
         }
+    
+        StopFire();
         CoroutineCheck = false;
+    
     }
 
     public override void Render()
@@ -49,17 +38,23 @@ public class Rob08AttackNet : RobAttackNet
 
     public override void Fire()
     {
-        foreach (var fp in Rob08StooterNet)
+        if (!Object.HasStateAuthority)
+            return;
+
+        foreach (var st in rob08Shooters)
         {
-            fp.Shoot();
+            st.BeginFire(robBase.data.attackSpeed);
         }
+
+        AttackTick++; 
+    
     }
 
-    private void FireStop()
+    private void StopFire()
     {
-        foreach (var fp in Rob08StooterNet)
-        {
-            fp.StootStop();
-        }
+        if (!Object.HasStateAuthority)
+        return;
+        foreach (var st in rob08Shooters)
+            st.StopFire();
     }
 }

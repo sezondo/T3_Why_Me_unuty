@@ -3,103 +3,150 @@ using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
 
-public class Rob08BulletsNet : BulletsNet
+public class Rob08BulletsNet : NetworkBehaviour
 {
-    [SerializeField] private ParticleSystem flameParticleFire;
-    [SerializeField] private ParticleSystem flameParticleSmoke;
-    [SerializeField] private ParticleSystem flameParticleBits;
-    private List<GameObject> damagedTargets;
-    [HideInInspector] public float attackTime;
-    [SerializeField] private AudioClip audioClipFire;
+    [Header("발사 연출")]
+    [SerializeField] private ParticleSystem fireFX;
+    [SerializeField] private ParticleSystem smokeFX;
+    [SerializeField] private ParticleSystem bitsFX;
     [SerializeField] private AudioSource audioSource;
 
-    public void OnEnable()
+    [Header("데미지 데이터")]
+    [SerializeField] private BulletData bulletData;
+    [SerializeField] private Collider damageCollider;
+
+    [Networked] private float attackInterval { get; set; }
+
+    private readonly HashSet<GameObject> damagedTargets = new();
+    private Coroutine stopRoutine;
+
+    private void Awake()
     {
-        if (flameParticleFire != null)
-        {
-            flameParticleFire.Play();
-        }
-        if (flameParticleSmoke != null)
-        {
-            flameParticleSmoke.Play();
-        }
-        if (flameParticleBits != null)
-        {
-            flameParticleBits.Play();
-        }
-        audioSource.Play();
+        if (damageCollider == null)
+            damageCollider = GetComponent<Collider>();
+
+        if (damageCollider != null)
+            damageCollider.isTrigger = true;
     }
 
-    public override void Start()
+    private void OnDisable()
     {
-        damage = bulletData.bulletDamage;
+        StopAllCoroutines();
+        damagedTargets.Clear();
+        stopRoutine = null;
 
-        factionType = bulletData.faction;
+        if (damageCollider != null)
+            damageCollider.enabled = false;
 
-        if (bulletData.faction == FactionType.Ally)
+        PlayFx(false);
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    public void RPC_SetFire(bool enable, float interval)
+    {
+        if (enable)
         {
-            gameObject.layer = LayerMask.NameToLayer("Ally");
+            attackInterval = Mathf.Max(0.05f, interval);
+
+            if (!gameObject.activeSelf)
+                gameObject.SetActive(true);
+
+            if (stopRoutine != null)
+            {
+                StopCoroutine(stopRoutine);
+                stopRoutine = null;
+            }
+
+            damagedTargets.Clear();
+            ToggleDamage(true);
+            PlayFx(true);
         }
-        else if (bulletData.faction == FactionType.Enemy)
+        else
         {
-            gameObject.layer = LayerMask.NameToLayer("Enemy");
+            ToggleDamage(false);
+            PlayFx(false);
+
+            if (stopRoutine != null)
+                StopCoroutine(stopRoutine);
+
+            stopRoutine = StartCoroutine(DelayedCleanup());
         }
-        damagedTargets = new List<GameObject>();
+    }
+
+    private void ToggleDamage(bool enable)
+    {
+        if (damageCollider != null)
+            damageCollider.enabled = enable;
+    }
+
+    private void PlayFx(bool enable)
+    {
+        ToggleParticle(fireFX, enable);
+        ToggleParticle(smokeFX, enable);
+        ToggleParticle(bitsFX, enable);
+
+        if (audioSource == null)
+            return;
+
+        if (enable)
+        {
+            if (!audioSource.isPlaying)
+                audioSource.Play();
+        }
+        else
+        {
+            if (audioSource.isPlaying)
+                audioSource.Stop();
+        }
+    }
+
+    private static void ToggleParticle(ParticleSystem ps, bool enable)
+    {
+        if (ps == null)
+            return;
+
+        if (enable)
+            ps.Play();
+        else
+            ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
     }
 
     private void OnTriggerStay(Collider other)
     {
         if (!Object.HasStateAuthority)
-        {
             return;
-        }
 
-        if (other.gameObject.layer != this.gameObject.layer)
-        {
-            if (!damagedTargets.Contains(other.gameObject))
-            {
-                RobHp robHp;
-                robHp = other.GetComponent<RobHp>();
-                if (robHp != null)
-                {
-                    robHp.TakeDamage(damage);
-                    damagedTargets.Add(other.gameObject);
-                    StartCoroutine(RemoveFromListAfterDelay(other.gameObject, attackTime));
-                }
-            }
-        }
+        if (other.gameObject.layer == gameObject.layer)
+            return;
+
+        if (damagedTargets.Contains(other.gameObject))
+            return;
+
+        if (!other.TryGetComponent(out RobHp hp))
+            return;
+
+        hp.TakeDamage(bulletData.bulletDamage);
+        damagedTargets.Add(other.gameObject);
+
+        StartCoroutine(RemoveAfterDelay(other.gameObject, attackInterval));
     }
 
-    private IEnumerator RemoveFromListAfterDelay(GameObject target, float delay)
+    private IEnumerator RemoveAfterDelay(GameObject target, float delay)
     {
         yield return new WaitForSeconds(delay);
         damagedTargets.Remove(target);
     }
 
-    public IEnumerator stopFire()
+    private IEnumerator DelayedCleanup()
     {
         yield return new WaitForSeconds(2.5f);
-        gameObject.SetActive(false);
-    }
+        damagedTargets.Clear();
+        stopRoutine = null;
 
-    public override void OnTriggerEnter(Collider other)
-    {
-
-    }
-    public override void DestroyBullet()
-    {
-
-    }
-    public override void Update()
-    {
-        //transform.position = Vector3.zero;
-    }
-    public override void FixedUpdateNetwork()
-    {
-
-    }
-    public override void Spawned()
-    {
-        
+        if (Object != null && Object.IsValid && Object.HasStateAuthority)
+        {
+            if (gameObject.activeSelf)
+                gameObject.SetActive(false);
+        }
     }
 }
