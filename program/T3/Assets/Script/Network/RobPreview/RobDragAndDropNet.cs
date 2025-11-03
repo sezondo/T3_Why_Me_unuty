@@ -1,26 +1,8 @@
 using UnityEngine;
-using System.Collections;
-using Fusion;
 
-public class RobDragAndDrop : MonoBehaviour
+public class RobDragAndDropNet : RobDragAndDrop
 {
-    [SerializeField] protected LayerMask groundLayer;
-    protected GameObject currentPreview;
-    protected RobBaseReady robBaseReady;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public virtual void Start()
-    {
-        currentPreview = this.gameObject;
-        robBaseReady = GetComponent<RobBaseReady>();
-    }
-
-    // Update is called once per frame
-    public virtual void Update()
-    {
-        Drag();
-    }
-    public virtual void Drag()
+    public override void Drag()
     {
         if (robBaseReady.readyState == ReadyUnitState.Readyed) return;
 
@@ -36,16 +18,17 @@ public class RobDragAndDrop : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0)) // 마우스 놓음
         {   // 코스트 초과일 경우
-            if (ReadyManager.instance.currentCost + robBaseReady.robRedayData.cost > ReadyManager.instance.levelData.Cost) 
+            if (CostManagerNet.instance.currentCost < robBaseReady.robRedayData.cost)
             {
                 ReadyManager.instance.StartPopupCostOverrun();
                 ReadyManager.instance.useButton = false;
                 Destroy(gameObject);
+
                 return;
 
             }
             // Ground가 아닌 이상한데 둘 경우
-            if (!Physics.Raycast(ray, 100f, LayerMask.GetMask("Ground")) && !(ReadyManager.instance.currentCost + robBaseReady.robRedayData.cost > ReadyManager.instance.levelData.Cost))
+            if (!Physics.Raycast(ray, 100f, LayerMask.GetMask("Ground")) && !(CostManagerNet.instance.currentCost < robBaseReady.robRedayData.cost))
             {
                 ReadyManager.instance.useButton = false;
                 Destroy(gameObject);
@@ -54,10 +37,11 @@ public class RobDragAndDrop : MonoBehaviour
 
             ConfirmPlacement(hit.point);
         }
-
     }
-    protected virtual void ConfirmPlacement(Vector3 position)
+    
+    protected override void ConfirmPlacement(Vector3 position)
     {
+        /*
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit[] hits = Physics.RaycastAll(ray, 100f, LayerMask.GetMask("Ally"));
 
@@ -66,27 +50,29 @@ public class RobDragAndDrop : MonoBehaviour
             if (hit.collider.gameObject != this.gameObject) // 자기 자신 제외
             {
                 Debug.Log("겹침");
-                ReadyManager.instance.StartPopup();
+                ReadyManager.instance.StartPopup(); //이건 한번 인게임 테스트 해보면서 수정
                 return;
             }
         }
+        */
 
         if (robBaseReady.readyState != ReadyUnitState.Readyed)
         {
             ReadyManager.instance.DorpAudio();
             ReadyManager.instance.useButton = false;
             robBaseReady.ChangeState(ReadyUnitState.Readyed);
+
         }
 
-        ReadyManager.instance.AddCost(robBaseReady.robRedayData.cost);
-        ReadyManager.instance.currentPreviews.Add(this.gameObject);
-
+        
     }
 
-    
+    public override void Start()
+    {
 
-
-
-
-    
+    }
+    public override void Update()
+    {
+        
+    }
 }
