@@ -1,16 +1,17 @@
+using Fusion;
 using UnityEngine;
 
 public class RobButton : MonoBehaviour
 {
-    private GameObject previewUnitPrefab01;
-    private GameObject previewUnitPrefab02;
-    private GameObject previewUnitPrefab03;
-    private GameObject previewUnitPrefab04;
-    private GameObject previewUnitPrefab05;
-    private GameObject previewUnitPrefab06;
-    private GameObject previewUnitPrefab07;
-    private GameObject previewUnitPrefab08;
-    private GameObject previewUnitPrefab012;
+    protected GameObject previewUnitPrefab01;
+    protected GameObject previewUnitPrefab02;
+    protected GameObject previewUnitPrefab03;
+    protected GameObject previewUnitPrefab04;
+    protected GameObject previewUnitPrefab05;
+    protected GameObject previewUnitPrefab06;
+    protected GameObject previewUnitPrefab07;
+    protected GameObject previewUnitPrefab08;
+    protected GameObject previewUnitPrefab012;
     public RobReadyData robRedayData01;
     public RobReadyData robRedayData02;
     public RobReadyData robRedayData03;
@@ -23,7 +24,7 @@ public class RobButton : MonoBehaviour
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public virtual void Start()
     {
         previewUnitPrefab01 = robRedayData01.RobRedayPrefab;
         previewUnitPrefab02 = robRedayData02.RobRedayPrefab;

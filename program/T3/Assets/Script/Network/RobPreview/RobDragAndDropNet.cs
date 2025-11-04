@@ -67,12 +67,4 @@ public class RobDragAndDropNet : RobDragAndDrop
         
     }
 
-    public override void Start()
-    {
-
-    }
-    public override void Update()
-    {
-        
-    }
 }
