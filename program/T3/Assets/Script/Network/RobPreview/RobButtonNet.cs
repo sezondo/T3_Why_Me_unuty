@@ -13,8 +13,8 @@ public class RobButtonNet : RobButton
     public RobPreviewData robPreview12;
     public override void Start()
     {
-        //if (Matchmaker.Runner.IsServer || true)
-        if (true)
+        if (Matchmaker.Runner.IsServer || true)
+        //if (true)
         {
             previewUnitPrefab01 = robPreview01.RobPreviewHost;
             previewUnitPrefab02 = robPreview02.RobPreviewHost;
@@ -26,7 +26,7 @@ public class RobButtonNet : RobButton
             previewUnitPrefab08 = robPreview08.RobPreviewHost;
             previewUnitPrefab012 = robPreview12.RobPreviewHost;
         }
-        /*
+        
         if (Matchmaker.Runner.IsClient)
         {
             previewUnitPrefab01 = robPreview01.RobPreviewClient;
@@ -39,6 +39,6 @@ public class RobButtonNet : RobButton
             previewUnitPrefab08 = robPreview08.RobPreviewClient;
             previewUnitPrefab012 = robPreview12.RobPreviewClient;
         }
-        */
+        
     }
 }

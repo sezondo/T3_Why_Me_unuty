@@ -58,6 +58,7 @@ public class RobDragAndDropNet : RobDragAndDrop
 
         if (robBaseReady.readyState != ReadyUnitState.Readyed)
         {
+            CostManagerNet.instance.TakeCost(robBaseReady.robRedayData.cost);
             ReadyManager.instance.DorpAudio();
             ReadyManager.instance.useButton = false;
             robBaseReady.ChangeState(ReadyUnitState.Readyed);

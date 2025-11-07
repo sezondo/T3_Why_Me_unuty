@@ -1,10 +1,9 @@
 using Fusion;
 using UnityEngine;
 
-public class RobPreview : NetworkBehaviour
+public class RobPreview : MonoBehaviour
 {
     protected RobBaseReady robBaseReady;
-    private NetworkObject networkObject;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,13 +16,11 @@ public class RobPreview : NetworkBehaviour
     {
         if (robBaseReady.readyState == ReadyUnitState.Readyed)
         {
-            networkObject = Runner.Spawn(robBaseReady.robRedayData.RobRedayPrefab, transform.position);
-        }
+            LocalToNetworkSpawnManmeger.instance.RequestReadyUnitSpawn(robBaseReady.robRedayData, transform.position, transform.rotation);
 
-        if (networkObject != null)
-        {
             Destroy(gameObject);
         }
+
     }
 
     

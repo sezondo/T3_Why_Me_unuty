@@ -72,4 +72,9 @@ public class CostManagerNet : MonoBehaviour
         }
     }
 
+    public void TakeCost(float minusCost)
+    {
+        currentCost -= minusCost;
+    }
+
 }
