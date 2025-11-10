@@ -1,26 +1,28 @@
 using Fusion;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class RobReadyNet : NetworkBehaviour
 {
     public RobNetworkUnitData robNetworkUnitData;
-    private TickTimer Tick { get; set; }
+    [HideInInspector, Networked] public TickTimer Tick { get; private set; }
     private TickTimer _Tick { get; set; }
     private bool stopFlag;
     private NetworkObject realUnit;
-
     private NetworkTransform networkTransform;
-    private Vector3 vector3;
+    public bool IsSpawned { get; private set; } 
 
     public override void Spawned()
     {
         if (Runner.IsServer)
         {
             Tick = TickTimer.CreateFromSeconds(Runner, robNetworkUnitData.spongeWaitingTime);
-            vector3 = transform.position;
+
             //realUnit = Runner.Spawn(robNetworkUnitData.RobPrefab, vector3); //  실제 유닛 미리 생성
             //networkTransform = realUnit.GetComponent<NetworkTransform>();
         }
+        IsSpawned = true;
         
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -34,7 +36,9 @@ public class RobReadyNet : NetworkBehaviour
         {
             stopFlag = true;
 
-            NetworkRobSpawnManmeger.instance.RequestRealUnitSpawn(robNetworkUnitData, transform.position, transform.rotation, Object.InputAuthority);
+            realUnit = NetworkRobSpawnManmeger.instance.RequestRealUnitSpawn(robNetworkUnitData, transform.position, transform.rotation, Object.InputAuthority);
+            var agent = realUnit.GetComponent<NavMeshAgent>();
+            agent.Warp(transform.position);
             
             _Tick = TickTimer.CreateFromSeconds(Runner, 0.05f);
         }

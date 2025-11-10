@@ -7,7 +7,6 @@ public class NetworkRobSpawnManmeger : NetworkBehaviour
     public static NetworkRobSpawnManmeger instance { get; private set; }
 
     [SerializeField] private List<RobNetworkUnitData> spawnableUnits = new();
-    [SerializeField] private Vector3 defaultPreloadPosition = new Vector3(1000f, 0f, 0f);
 
     private readonly Dictionary<RobNetworkUnitData, byte> lookup = new();
 
@@ -48,49 +47,44 @@ public class NetworkRobSpawnManmeger : NetworkBehaviour
     }
 
     /// <summary>
-    /// 요청한 플레이어에게 소유권을 부여하고 실제 전투 유닛을 스폰합니다.
+    /// 요청 플레이어 권한으로 실제 전투 유닛을 즉시 스폰합니다.
     /// </summary>
-    public NetworkObject RequestRealUnitSpawn(RobNetworkUnitData unitData, Vector3 preloadPosition, Quaternion rotation, PlayerRef owner)
+    public NetworkObject RequestRealUnitSpawn(RobNetworkUnitData unitData, Vector3 position, Quaternion rotation, PlayerRef owner)
     {
         if (unitData == null)
         {
-            Debug.LogWarning("[NetworkSpawnManmeger] unitData is null.");
+            Debug.LogWarning("[NetworkRobSpawnManmeger] unitData is null.");
             return null;
         }
 
         if (Matchmaker.Runner == null)
         {
-            Debug.LogWarning("[NetworkSpawnManmeger] Runner not ready.");
+            Debug.LogWarning("[NetworkRobSpawnManmeger] Runner not ready.");
             return null;
         }
 
         if (!lookup.TryGetValue(unitData, out byte id))
         {
-            Debug.LogWarning("[NetworkSpawnManmeger] unitData not registered in list.");
+            Debug.LogWarning("[NetworkRobSpawnManmeger] unitData not registered in list.");
             return null;
         }
 
         if (Object != null && Object.HasStateAuthority)
         {
-            return SpawnRealUnitInternal(id, preloadPosition, rotation, owner);
+            return SpawnRealUnitInternal(id, position, rotation, owner);
         }
 
-        RPC_RequestRealUnitSpawn(owner, id, preloadPosition, rotation);
+        RPC_RequestRealUnitSpawn(owner, id, position, rotation);
         return null;
     }
 
-    public NetworkObject SpawnRealUnitImmediate(RobNetworkUnitData unitData, PlayerRef owner)
-    {
-        return RequestRealUnitSpawn(unitData, defaultPreloadPosition, Quaternion.identity, owner);
-    }
-
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
-    private void RPC_RequestRealUnitSpawn(PlayerRef owner, byte dataId, Vector3 preloadPosition, Quaternion rotation, RpcInfo info = default)
+    private void RPC_RequestRealUnitSpawn(PlayerRef owner, byte dataId, Vector3 position, Quaternion rotation, RpcInfo info = default)
     {
-        SpawnRealUnitInternal(dataId, preloadPosition, rotation, owner);
+        SpawnRealUnitInternal(dataId, position, rotation, owner);
     }
 
-    private NetworkObject SpawnRealUnitInternal(byte dataId, Vector3 preloadPosition, Quaternion rotation, PlayerRef owner)
+    private NetworkObject SpawnRealUnitInternal(byte dataId, Vector3 position, Quaternion rotation, PlayerRef owner)
     {
         if (Matchmaker.Runner == null)
         {
@@ -99,17 +93,18 @@ public class NetworkRobSpawnManmeger : NetworkBehaviour
 
         if (dataId >= spawnableUnits.Count)
         {
-            Debug.LogWarning("[NetworkSpawnManmeger] Invalid data id.");
+            Debug.LogWarning("[NetworkRobSpawnManmeger] Invalid data id.");
             return null;
         }
 
         RobNetworkUnitData data = spawnableUnits[dataId];
         if (data == null || data.RobPrefab == null)
         {
-            Debug.LogWarning("[NetworkSpawnManmeger] Prefab missing for data id.");
+            Debug.LogWarning("[NetworkRobSpawnManmeger] Prefab missing for data id.");
             return null;
         }
 
-        return Matchmaker.Runner.Spawn(data.RobPrefab, preloadPosition, rotation, owner);
+        return Matchmaker.Runner.Spawn(data.RobPrefab, position, rotation, owner);
     }
 }
+
