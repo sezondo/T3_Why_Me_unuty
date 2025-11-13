@@ -11,7 +11,7 @@ public class Rob08Bullets : Bullets
     private List<GameObject> damagedTargets;
     [HideInInspector] public float attackTime;
     [SerializeField] private AudioClip audioClipFire;
-    [SerializeField] private AudioSource audioSource;
+    //[SerializeField] private AudioSource audioSource;
 
     public void OnEnable()
     {
@@ -27,7 +27,11 @@ public class Rob08Bullets : Bullets
         {
             flameParticleBits.Play();
         }
-        audioSource.Play();
+        if (SoundManager.instance != null && audioClipFire != null)
+        {
+            SoundManager.instance.PlaySFX(audioClipFire, transform);
+        }
+    
     }
     public override void Start()
     {

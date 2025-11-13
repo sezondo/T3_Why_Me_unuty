@@ -24,10 +24,21 @@ public class CoolTime : MonoBehaviour
         {
             return;
         }
+
+        if (robReadyNet == null || robReadyNet.Object == null || !robReadyNet.Object.IsValid)
+        {
+            // 이미 삭제된 상태 → 슬라이더 초기화/비활성화 등 필요 시 처리
+            return;
+    
+        }
+
         if (robReadyNet.Tick.IsRunning)
         {
             healthSlider.value = healthSlider.maxValue - (robReadyNet.Tick.RemainingTime(Matchmaker.Runner) ?? 0f);
         }
+    
+        
+        
         
     }
 }
