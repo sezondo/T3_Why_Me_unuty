@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a0ff0350f59c4344fb05dfb27e45c83d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 166709
+  packageName: Mech Pack
+  packageVersion: 1.0
+  assetPath: Assets/Mech Pack/Prefabs/Base/mech_walker.prefab
+  uploadId: 362659

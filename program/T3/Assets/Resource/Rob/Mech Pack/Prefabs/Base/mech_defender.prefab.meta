@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 221636d90295f0d4fac06bdbec1e28de
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 166709
+  packageName: Mech Pack
+  packageVersion: 1.0
+  assetPath: Assets/Mech Pack/Prefabs/Base/mech_defender.prefab
+  uploadId: 362659

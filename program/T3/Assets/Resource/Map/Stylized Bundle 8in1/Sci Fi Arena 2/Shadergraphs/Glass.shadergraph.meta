@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 7bf41ea8cbfaa1a409e61560d8c2de0a
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 625f186215c104763be7675aa2d941aa, type: 3}
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269455
+  packageName: Sci-Fi Arena Pack v2
+  packageVersion: 1.0
+  assetPath: Assets/Stylized Bundle 8in1/Sci Fi Arena 2/Shadergraphs/Glass.shadergraph
+  uploadId: 624175

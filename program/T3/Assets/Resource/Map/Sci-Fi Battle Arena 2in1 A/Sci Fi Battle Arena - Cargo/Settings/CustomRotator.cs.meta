@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 05d9c44cbd9f43d43a5e1ff66a5dd693
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 321084
+  packageName: Sci Fi Battle Arena - 2in1 AB
+  packageVersion: 1.0
+  assetPath: Assets/Sci-Fi Battle Arena 2in1 A/Sci Fi Battle Arena - Cargo/Settings/CustomRotator.cs
+  uploadId: 760752
