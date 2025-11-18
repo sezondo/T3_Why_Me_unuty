@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class RobNetworkUnitData : ScriptableObject
 {
+    //public float EnemyCost; // Enemy전용
     public float spongeWaitingTime;
     public GameObject RobPrefab;
 
