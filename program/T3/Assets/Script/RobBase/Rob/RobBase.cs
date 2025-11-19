@@ -1,6 +1,7 @@
 using UnityEngine;
 using Fusion;
 using Unity.VisualScripting;
+using UnityEngine.AI;
 
 public class RobBase : NetworkBehaviour
 {
@@ -9,6 +10,7 @@ public class RobBase : NetworkBehaviour
     protected Animator animator;
     protected Collider unitCollider;
     private Rigidbody rb;
+    private NavMeshAgent navMeshAgent; //애니메이션용
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public virtual void Start()
@@ -17,6 +19,7 @@ public class RobBase : NetworkBehaviour
         currentState = UnitState.Idle;
         unitCollider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
 
         rb.isKinematic = true;
 
@@ -57,6 +60,10 @@ public class RobBase : NetworkBehaviour
 
         animator.SetInteger("State", (int)currentState); // Attack 애니메이션은 트리거로 따로 관리
         
+        if (navMeshAgent.velocity.sqrMagnitude < 0.01 && currentState != UnitState.Attacking)
+        {
+            animator.SetInteger("State", 0);
+        }
     }
 
     public void ChangeState(UnitState unitState)

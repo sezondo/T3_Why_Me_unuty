@@ -4,6 +4,7 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
     [HideInInspector] public int clearNumber;
+    [HideInInspector] public int clearNumberNet;
     private const string KEY_CLEAR = "pm_clearNumber";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -33,6 +34,16 @@ public class PlayerManager : MonoBehaviour
         if (level > clearNumber)
         {
             clearNumber = level;
+            PlayerPrefs.SetInt(KEY_CLEAR, clearNumber);
+            PlayerPrefs.Save(); // 즉시 디스크 반영
+        }
+    }
+
+    public void UpdateClearNumberIfHigherNet(int level)
+    {
+        if (level > clearNumber)
+        {
+            clearNumberNet = level;
             PlayerPrefs.SetInt(KEY_CLEAR, clearNumber);
             PlayerPrefs.Save(); // 즉시 디스크 반영
         }

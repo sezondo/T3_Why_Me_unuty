@@ -3,7 +3,7 @@ using System.Collections;
 using Fusion;
 public class RobHp : NetworkBehaviour
 {
-    protected int currentHp;
+    public int currentHp;
     protected RobBase robBase;
     protected Animator animator;
     //[SerializeField] private AudioClip dieAudioClip;
