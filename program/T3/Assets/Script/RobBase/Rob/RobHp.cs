@@ -52,6 +52,7 @@ public class RobHp : NetworkBehaviour
 
         if (currentHp <= 0 && robBase.currentState != UnitState.Dead)
         {
+            currentHp = 0;
             DeadDisposal();
         }
     }

@@ -70,6 +70,8 @@ public class CostManagerNet : MonoBehaviour
         {
             regenPreSec += tickSeconds;
         }
+
+     //   Debug.Log(currentCost);
     }
 
     public void TakeCost(float minusCost)

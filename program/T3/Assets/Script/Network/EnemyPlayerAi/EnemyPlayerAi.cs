@@ -67,7 +67,7 @@ public class EnemyPlayerAi : NetworkBehaviour
                 Random.Range(bounds.min.z, bounds.max.z)
             );
 
-            if (NavMesh.SamplePosition(randomPoint, out var hit, 5f, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(randomPoint, out var hit, 2f, NavMesh.AllAreas))
                 return hit.position;
         }
 
