@@ -24,6 +24,8 @@ public class RobReadyNet : NetworkBehaviour
         }
         IsSpawned = true;
         
+        
+        Debug.Log(transform.position);
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void FixedUpdateNetwork()

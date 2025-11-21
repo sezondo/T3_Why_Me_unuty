@@ -9,6 +9,9 @@ public class EnemyPlayerAi : NetworkBehaviour
     [SerializeField] float minInterval = 1f, maxInterval = 10f;
     [SerializeField] float maxCost = 20f, regenPerSec = 1f;
     [SerializeField] Collider enemySpawnArea;
+    [SerializeField] float sampleRadius;
+    private Vector3 spawnPos;
+
 
     float currentCost;
     float nextSpawnTime;
@@ -50,7 +53,18 @@ public class EnemyPlayerAi : NetworkBehaviour
         int candidateslength = Random.Range(0, candidates.Count);
         var chosen = candidates[candidateslength];
 
-        Runner.Spawn(chosen.RobRedayPrefab, GetRandomSpawnPosition());
+        var obj = Runner.Spawn(chosen.RobRedayPrefab, GetRandomSpawnPosition());
+
+        var agent = obj.GetComponent<NavMeshAgent>();
+
+        if (agent != null)
+        {
+            agent.enabled = false;
+
+            agent.isStopped = true;        // 레디 유닛 단계라면 멈춰두기
+            agent.enabled = true;
+        }
+        
 
         currentCost -= chosen.cost;
     }
@@ -67,9 +81,11 @@ public class EnemyPlayerAi : NetworkBehaviour
                 Random.Range(bounds.min.z, bounds.max.z)
             );
 
-            if (NavMesh.SamplePosition(randomPoint, out var hit, 2f, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(randomPoint, out var hit, sampleRadius , NavMesh.AllAreas))
+            {
                 return hit.position;
-        }
+            }            
+        }    
 
         Vector3 defaultPoint = new Vector3(bounds.center.x, bounds.center.y, bounds.center.z);
 

@@ -13,7 +13,7 @@ public class UiCurrentCost : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(CostManagerNet.instance.currentCost);
+        //Debug.Log(CostManagerNet.instance.currentCost);
         currentCostText.text = "Current Cost : " + ((int)CostManagerNet.instance.currentCost).ToString();
     }
 }
