@@ -49,7 +49,7 @@ public class Bullets : NetworkBehaviour
             return;
         }
 
-        //Debug.Log("총알 충돌 대상: " + other.name + ", 태그: " + other.tag);
+        Debug.Log("총알 충돌 대상: " + other.name + ", 태그: " + other.tag);
 
         if (other.gameObject.layer != gameObject.layer)
         {

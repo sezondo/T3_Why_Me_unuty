@@ -66,6 +66,10 @@ public class ReadyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (currentCostText == null)
+        {
+            return;
+        }
         currentCostText.text = "Current Cost : " + currentCost.ToString();
     }
 

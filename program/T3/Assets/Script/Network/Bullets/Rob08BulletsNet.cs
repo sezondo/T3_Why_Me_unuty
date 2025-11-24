@@ -27,6 +27,13 @@ public class Rob08BulletsNet : NetworkBehaviour
 
         if (damageCollider != null)
             damageCollider.isTrigger = true;
+
+        if (audioSource != null) {
+            audioSource.spatialBlend = 1f;  // 3D
+            audioSource.minDistance = 5f;   // 근거리 최대 볼륨
+            audioSource.maxDistance = 30f;  // 이 거리 이후로 거의 안 들림 (필요에 맞게 조정)
+            audioSource.rolloffMode = AudioRolloffMode.Linear;
+        }
     }
 
     private void OnDisable()

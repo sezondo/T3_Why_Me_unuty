@@ -93,7 +93,7 @@ public class RobDetector : NetworkBehaviour
         if (Physics.Raycast(transform.position + Vector3.up * 1f, dir, out hit, attackRange, layerMask))
         {
 #if UNITY_EDITOR
-            Debug.Log($"[{name}] Raycast: HIT {hit.collider.name}");// 디버그용 로그
+//            Debug.Log($"[{name}] Raycast: HIT {hit.collider.name}");// 디버그용 로그
 #endif
 
 
