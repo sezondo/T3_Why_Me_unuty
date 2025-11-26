@@ -59,11 +59,12 @@ public class RobBase : NetworkBehaviour
         }
 
         animator.SetInteger("State", (int)currentState); // Attack 애니메이션은 트리거로 따로 관리
-        
+        /*
         if (navMeshAgent.velocity.sqrMagnitude < 0.01 && currentState != UnitState.Attacking)
         {
             animator.SetInteger("State", 0);
         }
+        */
     }
 
     public void ChangeState(UnitState unitState)
