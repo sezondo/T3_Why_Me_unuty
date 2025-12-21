@@ -1,5 +1,13 @@
 fileFormatVersion: 2
 guid: ef9e56c44cb480c4b9cffb04cfdf8b85
+AssetOrigin:
+  serializedVersion: 1
+  productId: 321084
+  packageName: Sci Fi Battle Arena - 2in1 AB
+  packageVersion: 1.0
+  assetPath: Assets/Sci-Fi Battle Arena 2in1 A/Sci Fi Battle Arena - Cargo/Scenes/Sci
+    Fi Arena 4/ReflectionProbe-0.exr
+  uploadId: 760752
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,6 +101,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 100
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites: []
@@ -115,11 +136,3 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 321084
-  packageName: Sci Fi Battle Arena - 2in1 AB
-  packageVersion: 1.0
-  assetPath: Assets/Sci-Fi Battle Arena 2in1 A/Sci Fi Battle Arena - Cargo/Scenes/Sci
-    Fi Arena 4/ReflectionProbe-0.exr
-  uploadId: 760752
